@@ -61,7 +61,7 @@ export const triedDisciplines: TriedDiscipline[] = [
     tag: "Mobile & Nature",
     colorBg: "#F4D000",
     image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=800&auto=format&fit=crop",
-    video: "/nature%20photography.mp4",
+    video: "/nature photography.mp4"
     rotation: "-rotate-2",
     tagline: "Finding patterns in the everyday"
   },
