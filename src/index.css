@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-primary: #F7F6F0;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #EFECE3;
+    --text-primary: #111111;
+    --text-secondary: #605E59;
+    --text-muted: #8E8D88;
+    --border-subtle: #E5E2D6;
+    --accent-yellow: #F4D000;
+    --accent-yellow-light: #FBF0A2;
+  }
+
+  .dark {
+    --bg-primary: #101010;
+    --bg-surface: #181818;
+    --bg-subtle: #222222;
+    --text-primary: #F5F4EF;
+    --text-secondary: #B0AEA8;
+    --text-muted: #757470;
+    --border-subtle: #2A2A2A;
+    --accent-yellow: #F4D000;
+    --accent-yellow-light: #4A4005;
+  }
+
+  html {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}
+
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-mono,
+.font-ui {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 208, 0, 0.6);
+}
+
+/* Custom interactive cursor state on desktop */
+@media (pointer: fine) {
+  .cursor-follow {
+    pointer-events: none;
+  }
+}
