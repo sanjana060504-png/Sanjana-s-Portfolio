@@ -17,38 +17,41 @@ export const CaseStudyPagination: React.FC<CaseStudyPaginationProps> = ({
     switch (slug) {
       case 'karagir':
         return {
-          card: 'hover:border-[#5C1D24] dark:hover:border-[#F4D000] hover:shadow-[0_8px_30px_rgba(92,29,36,0.12)]',
+          card: 'hover:border-[#5C1D24]/40 dark:hover:border-[#F4D000]/40 hover:shadow-[0_16px_36px_-6px_rgba(92,29,36,0.12)]',
           text: 'group-hover:text-[#5C1D24] dark:group-hover:text-[#F4D000]',
         };
       case 'edsuite-crm':
         return {
-          card: 'hover:border-[#0284C7] dark:hover:border-[#38BDF8] hover:shadow-[0_8px_30px_rgba(2,132,199,0.12)]',
+          card: 'hover:border-[#0284C7]/40 dark:hover:border-[#38BDF8]/40 hover:shadow-[0_16px_36px_-6px_rgba(2,132,199,0.12)]',
           text: 'group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]',
         };
       case 'exam-portal':
         return {
-          card: 'hover:border-[#01ABA7] dark:hover:border-[#22D3EE] hover:shadow-[0_8px_30px_rgba(1,171,167,0.12)]',
+          card: 'hover:border-[#01ABA7]/40 dark:hover:border-[#22D3EE]/40 hover:shadow-[0_16px_36px_-6px_rgba(1,171,167,0.12)]',
           text: 'group-hover:text-[#01ABA7] dark:group-hover:text-[#22D3EE]',
         };
       default:
         return {
-          card: 'hover:border-[#F4D000]',
+          card: 'hover:border-[#F4D000]/40 hover:shadow-[0_16px_36px_-6px_rgba(244,208,0,0.12)]',
           text: 'group-hover:text-[#F4D000]',
         };
     }
   };
 
   return (
-    <div className="pt-12 border-t border-[#E5E2D6] dark:border-[#252525] grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="pt-12 border-t border-[#E5E2D6] dark:border-[#252525] grid grid-cols-1 sm:grid-cols-2 gap-5" id="case-study-pagination-cards">
       {prevProject ? (
         <button
           onClick={() => onSelectProject(prevProject)}
-          className={`p-5 rounded-2xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl text-left transition-all duration-300 group shadow-sm hover:shadow-lg cursor-pointer ${
+          className={`p-6 sm:p-7 rounded-3xl border border-black/[0.07] dark:border-white/[0.12] bg-white/40 dark:bg-white/[0.05] hover:bg-white/60 dark:hover:bg-white/[0.09] backdrop-blur-xl text-left transition-all duration-300 group shadow-[0_10px_30px_-4px_rgba(0,0,0,0.05)] dark:shadow-[0_12px_32px_-4px_rgba(0,0,0,0.35)] hover:-translate-y-1 cursor-pointer relative overflow-hidden ${
             getProjectHoverStyles(prevProject.slug).card
           }`}
         >
+          {/* Subtle light reflection on glass surface */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/80 dark:via-white/30 to-transparent pointer-events-none" />
+
           <div
-            className={`flex items-center gap-1.5 text-xs font-sans text-[#8E8D88] uppercase mb-1.5 font-bold tracking-wider transition-colors ${
+            className={`flex items-center gap-1.5 text-xs font-sans text-[#8E8D88] uppercase mb-2 font-bold tracking-wider transition-colors ${
               getProjectHoverStyles(prevProject.slug).text
             }`}
           >
@@ -62,7 +65,7 @@ export const CaseStudyPagination: React.FC<CaseStudyPaginationProps> = ({
           >
             {prevProject.title}
           </div>
-          <div className="text-xs text-[#8E8D88] mt-1 line-clamp-1">
+          <div className="text-xs text-[#73716A] dark:text-[#9A9890] mt-1 line-clamp-1 font-sans">
             {prevProject.category}
           </div>
         </button>
@@ -73,12 +76,15 @@ export const CaseStudyPagination: React.FC<CaseStudyPaginationProps> = ({
       {nextProject ? (
         <button
           onClick={() => onSelectProject(nextProject)}
-          className={`p-5 rounded-2xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl text-right transition-all duration-300 group shadow-sm hover:shadow-lg cursor-pointer ${
+          className={`p-6 sm:p-7 rounded-3xl border border-black/[0.07] dark:border-white/[0.12] bg-white/40 dark:bg-white/[0.05] hover:bg-white/60 dark:hover:bg-white/[0.09] backdrop-blur-xl text-right transition-all duration-300 group shadow-[0_10px_30px_-4px_rgba(0,0,0,0.05)] dark:shadow-[0_12px_32px_-4px_rgba(0,0,0,0.35)] hover:-translate-y-1 cursor-pointer relative overflow-hidden ${
             getProjectHoverStyles(nextProject.slug).card
           }`}
         >
+          {/* Subtle light reflection on glass surface */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/80 dark:via-white/30 to-transparent pointer-events-none" />
+
           <div
-            className={`flex items-center justify-end gap-1.5 text-xs font-sans text-[#8E8D88] uppercase mb-1.5 font-bold tracking-wider transition-colors ${
+            className={`flex items-center justify-end gap-1.5 text-xs font-sans text-[#8E8D88] uppercase mb-2 font-bold tracking-wider transition-colors ${
               getProjectHoverStyles(nextProject.slug).text
             }`}
           >
@@ -92,7 +98,7 @@ export const CaseStudyPagination: React.FC<CaseStudyPaginationProps> = ({
           >
             {nextProject.title}
           </div>
-          <div className="text-xs text-[#8E8D88] mt-1 line-clamp-1">
+          <div className="text-xs text-[#73716A] dark:text-[#9A9890] mt-1 line-clamp-1 font-sans">
             {nextProject.category}
           </div>
         </button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, ArrowUpRight, Menu, X, Mail } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   currentView: 'home' | 'case-study';
@@ -7,6 +7,7 @@ interface NavbarProps {
   onNavigate: (sectionId?: string) => void;
   isDark: boolean;
   onToggleTheme: () => void;
+  onOpenResume: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -14,21 +15,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   onNavigate,
   isDark,
-  onToggleTheme
+  onToggleTheme,
+  onOpenResume,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [resumeNotice, setResumeNotice] = useState(false);
 
   const handleNavClick = (sectionId?: string) => {
     setMobileMenuOpen(false);
     onNavigate(sectionId);
-  };
-
-  const handleResumeClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigator.clipboard.writeText("sanjanadeshmukh.design@gmail.com");
-    setResumeNotice(true);
-    setTimeout(() => setResumeNotice(false), 3000);
   };
 
   // Close mobile menu on resize to desktop
@@ -75,18 +69,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => handleNavClick('playground')}
-            className={`text-sm font-semibold tracking-normal transition-colors hover:text-[#111111] dark:hover:text-[#F5F4EF] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D000] py-1 relative ${
-              currentView === 'home' && activeSection === 'playground'
-                ? 'text-[#111111] dark:text-[#F5F4EF] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#F4D000]'
-                : 'text-[#605E59] dark:text-[#8E8D88]'
-            }`}
-            id="nav-playground-btn"
-          >
-            Playground
-          </button>
-
-          <button
             onClick={() => handleNavClick('about')}
             className={`text-sm font-semibold tracking-normal transition-colors hover:text-[#111111] dark:hover:text-[#F5F4EF] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D000] py-1 relative ${
               currentView === 'home' && activeSection === 'about'
@@ -96,6 +78,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="nav-about-btn"
           >
             About
+          </button>
+
+          <button
+            onClick={() => handleNavClick('playground')}
+            className={`text-sm font-semibold tracking-normal transition-colors hover:text-[#111111] dark:hover:text-[#F5F4EF] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4D000] py-1 relative ${
+              currentView === 'home' && activeSection === 'playground'
+                ? 'text-[#111111] dark:text-[#F5F4EF] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#F4D000]'
+                : 'text-[#605E59] dark:text-[#8E8D88]'
+            }`}
+            id="nav-playground-btn"
+          >
+            For You
           </button>
 
           <button
@@ -129,16 +123,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          <a
-            href="mailto:sanjanadeshmukh.design@gmail.com?subject=Resume%20Request%20-%20Sanjana%20Deshmukh"
-            onClick={handleResumeClick}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border border-black/[0.12] dark:border-white/[0.15] bg-white/40 dark:bg-white/[0.04] backdrop-blur-md hover:border-[#F4D000] hover:bg-[#F4D000] hover:text-black dark:hover:text-black transition-all duration-200 focus:outline-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)]"
-            id="nav-resume-link"
-            title="Click to copy email / request resume"
+          <button
+            type="button"
+            onClick={onOpenResume}
+            className="inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border border-black/[0.12] dark:border-white/[0.15] bg-white/40 dark:bg-white/[0.04] backdrop-blur-md hover:border-[#F4D000] hover:bg-[#F4D000] hover:text-black dark:hover:text-black transition-all duration-200 focus:outline-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)] cursor-pointer active:scale-95"
+            id="nav-resume-btn"
+            title="View Sanjana's Resume"
           >
-            <span>{resumeNotice ? "Email Copied!" : "Resume"}</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+            <span>Resume</span>
+          </button>
         </div>
 
         {/* Mobile controls: Theme toggle + Hamburger */}
@@ -182,20 +175,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
-              onClick={() => handleNavClick('playground')}
-              className="py-2.5 text-xl font-bold text-left text-[#111111] dark:text-[#F5F4EF] hover:text-[#F4D000] transition-colors flex items-center justify-between"
-              id="mobile-nav-playground"
-            >
-              <span>Playground</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#F4D000]/20 text-[#111111] dark:text-[#F4D000] font-sans font-semibold">Curiosity</span>
-            </button>
-
-            <button
               onClick={() => handleNavClick('about')}
               className="py-2.5 text-xl font-bold text-left text-[#111111] dark:text-[#F5F4EF] hover:text-[#F4D000] transition-colors"
               id="mobile-nav-about"
             >
               About
+            </button>
+
+            <button
+              onClick={() => handleNavClick('playground')}
+              className="py-2.5 text-xl font-bold text-left text-[#111111] dark:text-[#F5F4EF] hover:text-[#F4D000] transition-colors flex items-center justify-between"
+              id="mobile-nav-playground"
+            >
+              <span>For You</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-[#F4D000]/20 text-[#111111] dark:text-[#F4D000] font-sans font-semibold">Curiosity</span>
             </button>
 
             <button
@@ -210,11 +203,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="pt-4 border-t border-[#E5E2D6] dark:border-[#252525] flex items-center justify-between">
             <span className="text-xs font-sans text-[#8E8D88]">Sanjana Deshmukh</span>
             <button
-              onClick={handleResumeClick}
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#111111] dark:text-[#F5F4EF] underline underline-offset-4 decoration-[#F4D000] decoration-2"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenResume();
+              }}
+              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#111111] dark:text-[#F5F4EF] underline underline-offset-4 decoration-[#F4D000] decoration-2 cursor-pointer"
             >
-              <span>{resumeNotice ? "Copied!" : "Request Resume"}</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <span>Resume</span>
             </button>
           </div>
         </div>

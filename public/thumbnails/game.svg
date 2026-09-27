@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181B" />
+      <stop offset="50%" stop-color="#27272A" />
+      <stop offset="100%" stop-color="#09090B" />
+    </linearGradient>
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(244, 208, 0, 0.08)" stroke-width="1" />
+    </pattern>
+    <linearGradient id="yellowGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F4D000" />
+      <stop offset="100%" stop-color="#E5C100" />
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Arcade CRT Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+  <rect width="800" height="600" fill="url(#gridPattern)" />
+
+  <!-- Game Window Header Bar -->
+  <rect x="40" y="30" width="720" height="48" rx="12" fill="#111111" stroke="#333333" stroke-width="1.5" />
+  <circle cx="70" cy="54" r="6" fill="#EF4444" />
+  <circle cx="92" cy="54" r="6" fill="#F59E0B" />
+  <circle cx="114" cy="54" r="6" fill="#10B981" />
+  <text x="400" y="59" fill="#A1A1AA" font-family="'Inter', monospace" font-size="13" font-weight="600" text-anchor="middle" letter-spacing="2">FIRST_YEAR_EXPERIMENT.EXE // STAGE 01</text>
+  <rect x="670" y="44" width="60" height="20" rx="4" fill="#F4D000" />
+  <text x="700" y="58" fill="#111111" font-family="'Inter', sans-serif" font-size="11" font-weight="bold" text-anchor="middle">LVL 1</text>
+
+  <!-- Game Arena Board -->
+  <rect x="40" y="94" width="720" height="466" rx="16" fill="#141417" stroke="#2D2D32" stroke-width="2" />
+
+  <!-- Floating Platforms & Obstacles -->
+  <rect x="90" y="440" width="220" height="24" rx="8" fill="#2E2E38" stroke="#F4D000" stroke-width="1.5" stroke-dasharray="4,4" />
+  <rect x="360" y="380" width="180" height="24" rx="8" fill="#2E2E38" stroke="#A1A1AA" stroke-width="1" />
+  <rect x="520" y="280" width="190" height="24" rx="8" fill="#2E2E38" stroke="#F4D000" stroke-width="1.5" stroke-dasharray="4,4" />
+  <rect x="200" y="240" width="160" height="24" rx="8" fill="#2E2E38" stroke="#A1A1AA" stroke-width="1" />
+  <rect x="340" y="160" width="200" height="24" rx="8" fill="#2E2E38" stroke="#F4D000" stroke-width="1.5" stroke-dasharray="4,4" />
+
+  <!-- Collectible Coins/Stars -->
+  <circle cx="140" cy="405" r="12" fill="url(#yellowGlow)" filter="url(#softGlow)" />
+  <circle cx="140" cy="405" r="5" fill="#FFFFFF" />
+  <circle cx="450" cy="345" r="12" fill="url(#yellowGlow)" filter="url(#softGlow)" />
+  <circle cx="450" cy="345" r="5" fill="#FFFFFF" />
+  <circle cx="610" cy="245" r="12" fill="url(#yellowGlow)" filter="url(#softGlow)" />
+  <circle cx="610" cy="245" r="5" fill="#FFFFFF" />
+  <circle cx="280" cy="205" r="12" fill="url(#yellowGlow)" filter="url(#softGlow)" />
+  <circle cx="280" cy="205" r="5" fill="#FFFFFF" />
+
+  <!-- Player Character (Playful Geometric Avatar) -->
+  <g transform="translate(180, 360)">
+    <rect x="-24" y="-24" width="48" height="48" rx="14" fill="#F4D000" stroke="#111111" stroke-width="2.5" />
+    <!-- Eyes -->
+    <ellipse cx="-7" cy="-5" rx="3.5" ry="5.5" fill="#111111" />
+    <path d="M 4 -5 L 11 -8 M 11 -8 L 12 -2" stroke="#111111" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Happy Smile -->
+    <path d="M -9 8 Q 0 16 9 8" fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Little jump indicator trail -->
+    <circle cx="0" cy="32" r="5" fill="#F4D000" opacity="0.6" />
+    <circle cx="0" cy="40" r="3" fill="#F4D000" opacity="0.3" />
+  </g>
+
+  <!-- Goal Flag -->
+  <g transform="translate(480, 105)">
+    <line x1="0" y1="0" x2="0" y2="55" stroke="#E4E4E7" stroke-width="3" stroke-linecap="round" />
+    <polygon points="0,5 34,18 0,31" fill="#F4D000" stroke="#B49800" stroke-width="1" />
+    <circle cx="0" cy="55" r="6" fill="#F4D000" />
+  </g>
+
+  <!-- On-Screen HUD Overlay -->
+  <g transform="translate(70, 130)">
+    <rect x="0" y="0" width="130" height="34" rx="8" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+    <text x="14" y="22" fill="#F4D000" font-family="'Inter', sans-serif" font-size="12" font-weight="bold">SCORE</text>
+    <text x="116" y="22" fill="#FFFFFF" font-family="'Inter', monospace" font-size="13" font-weight="bold" text-anchor="end">02,450</text>
+  </g>
+
+  <!-- Subtitle Tag inside screen -->
+  <rect x="260" y="500" width="280" height="32" rx="16" fill="rgba(0,0,0,0.75)" stroke="#F4D000" stroke-width="1" />
+  <text x="400" y="521" fill="#F4F4F5" font-family="'Caveat', cursive" font-size="17" text-anchor="middle">Made in Year 1 — logic, physics &amp; play</text>
+</svg>

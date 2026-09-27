@@ -3,107 +3,69 @@ import { Navbar } from './components/Navbar.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
 import { HeroSection } from './components/HeroSection.tsx';
 import { CuriousByDefault } from './components/CuriousByDefault.tsx';
-import { ThingsIveTried } from './components/ThingsIveTried.tsx';
+import { ToolsSection } from './components/ToolsSection.tsx';
+import { ExperienceSection } from './components/ExperienceSection.tsx';
 import { SelectedWork } from './components/SelectedWork.tsx';
 import { PlaygroundSection } from './components/PlaygroundSection.tsx';
 import { AboutSection } from './components/AboutSection.tsx';
 import { FooterSection } from './components/FooterSection.tsx';
-import { CaseStudyView } from './pages/CaseStudyView.tsx';
+import { ResumeModal } from './components/ResumeModal.tsx';
 import { KaragirCaseStudy } from './pages/KaragirCaseStudy.tsx';
 import { CRMCaseStudy } from './pages/CRMCaseStudy.tsx';
+import { CaseStudyView } from './pages/CaseStudyView.tsx';
 import { Project } from './types.ts';
-import { projectsData } from './data/portfolioData.ts';
 
-export default function App() {
+export function App() {
   const [currentView, setCurrentView] = useState<'home' | 'case-study'>('home');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(projectsData[0]);
-  const [activeSection, setActiveSection] = useState<string>('home');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('hero');
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('sanjana_theme');
-      if (saved) return saved === 'dark';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return (
+        localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      );
     }
     return false;
   });
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
-  // Dark mode class sync on HTML element
   useEffect(() => {
-    const root = document.documentElement;
     if (isDark) {
-      root.classList.add('dark');
-      localStorage.setItem('sanjana_theme', 'dark');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      root.classList.remove('dark');
-      localStorage.setItem('sanjana_theme', 'light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
 
-  // Track active section for navigation
-  useEffect(() => {
-    if (currentView !== 'home') return;
-
-    const sections = ['hero-section', 'selected-work', 'playground', 'about', 'contact'];
-    
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          const top = el.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(sections[i]);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentView]);
-
   const toggleTheme = () => {
-    setIsDark((prev) => !prev);
-  };
-
-  const handleNavigate = (sectionId?: string) => {
-    if (currentView === 'case-study') {
-      setCurrentView('home');
-      // Wait for layout to mount home view before scrolling
-      setTimeout(() => {
-        if (sectionId) {
-          const el = document.getElementById(sectionId);
-          if (el) {
-            const yOffset = -72;
-            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }, 50);
-    } else {
-      if (sectionId) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const yOffset = -72;
-          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
+    setIsDark(!isDark);
   };
 
   const handleOpenProject = (project: Project) => {
     setSelectedProject(project);
     setCurrentView('case-study');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigate = (sectionId?: string) => {
+    if (currentView === 'case-study') {
+      setCurrentView('home');
+      setSelectedProject(null);
+    }
+    if (sectionId) {
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -118,6 +80,7 @@ export default function App() {
         onNavigate={handleNavigate}
         isDark={isDark}
         onToggleTheme={toggleTheme}
+        onOpenResume={() => setIsResumeOpen(true)}
       />
 
       <main>
@@ -156,29 +119,41 @@ export default function App() {
         {/* VIEW: COMPLETE HOMEPAGE INTEGRATED EXPERIENCE */}
         {currentView === 'home' && (
           <>
-            {/* Section 01: Arrival */}
-            <HeroSection onExploreClick={() => handleNavigate('selected-work')} />
+            {/* Section 01: Hero Intro */}
+            <HeroSection
+              onExploreClick={() => handleNavigate('selected-work')}
+            />
 
-            {/* Work: Built & Designed */}
+            {/* Section 03: Selected Work (Projects Showcase with interactive hover cards) */}
             <SelectedWork onOpenProject={handleOpenProject} />
 
-            {/* Section 02: Curious By Default */}
+            {/* Section 04: About Me */}
+            <AboutSection />
+
+            {/* Section 02: Exploration (Intro & Visual Memory Stage) */}
             <CuriousByDefault />
 
-            {/* Section 03: Things I've Tried */}
-            <ThingsIveTried />
+            {/* Section 07: Tools I Work With (Compact Moving Toolkit Strip) */}
+            <ToolsSection />
 
-            {/* Section 05: The Playground (Placeholder) */}
+            {/* Section 08: Experience (Personal Journey Timeline) */}
+            <ExperienceSection />
+
+            {/* Playground Section: Leave a Note desk experience (just before contact) */}
             <PlaygroundSection />
-
-            {/* Section 06 & 07: About & Practical Toolkit */}
-            <AboutSection />
           </>
         )}
       </main>
 
-      {/* Unified Final Closing Section & Footer */}
+      {/* Footer Section */}
       <FooterSection />
+
+      {/* Resume Modal */}
+      {isResumeOpen && (
+        <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+      )}
     </div>
   );
 }
+
+export default App;

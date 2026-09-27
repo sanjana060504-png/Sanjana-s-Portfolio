@@ -72,6 +72,7 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
   }, []);
 
   const scrollToSection = (id: string) => {
+    setActiveSection(id);
     const el = document.getElementById(`section-${id}`);
     if (el) {
       const yOffset = -90;
@@ -127,16 +128,8 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
           1. COVER & SHORT PROJECT INTRO
           ============================================================ */}
       <section className="pt-10 pb-8 sm:pb-12 px-4 sm:px-8 max-w-6xl mx-auto border-b border-[#E5E2D6] dark:border-[#252525]">
-        {/* Top Back Nav & Category Tag */}
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <button
-            onClick={onBack}
-            className="inline-flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#605E59] dark:text-[#8E8D88] hover:text-[#111111] dark:hover:text-[#F5F4EF] transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 text-[#01ABA7]" />
-            <span>Work</span>
-          </button>
-
+        {/* Category Tag */}
+        <div className="flex items-center justify-end gap-4 mb-6">
           <span className="text-xs font-sans font-bold text-[#01ABA7] dark:text-[#22D3EE] uppercase tracking-widest bg-[#01ABA7]/10 border border-[#01ABA7]/20 px-3 py-1 rounded-full">
             Academic Assessment Platform
           </span>
@@ -201,6 +194,7 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
         onSectionSelect={scrollToSection}
         accent="exam"
         onJumpToOutput={handleJumpToOutput}
+        onBack={onBack}
       />
 
       {/* ============================================================
@@ -671,11 +665,13 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
         {/* ============================================================
             4. CLOSING: Card-Style Previous / Next Project Navigation
             ============================================================ */}
-        <CaseStudyPagination
-          prevProject={prevProject}
-          nextProject={nextProject}
-          onSelectProject={onSelectProject}
-        />
+        <div className="pt-4 pb-24 sm:pb-32">
+          <CaseStudyPagination
+            prevProject={prevProject}
+            nextProject={nextProject}
+            onSelectProject={onSelectProject}
+          />
+        </div>
       </main>
     </div>
   );

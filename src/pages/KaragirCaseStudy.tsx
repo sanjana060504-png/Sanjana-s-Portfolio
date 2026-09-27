@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
-  ArrowLeft,
-  ArrowRight,
-  Volume2,
-  ExternalLink,
-  ChevronDown,
   Maximize2,
   X
 } from 'lucide-react';
 import { Project } from '../types.ts';
 import { projectsData } from '../data/portfolioData.ts';
-import { CaseStudyNav } from '../components/CaseStudyNav.tsx';
+import { CaseStudyNav, CaseStudyNavSection } from '../components/CaseStudyNav.tsx';
 import { CaseStudyPagination } from '../components/CaseStudyPagination.tsx';
+import karagirPrototypeHtml from '../data/karagirPrototype.html?raw';
 
 interface KaragirCaseStudyProps {
   project: Project;
@@ -29,6 +25,14 @@ interface SectionData {
   }[];
 }
 
+// 7. Case Study Content Order exactly as specified:
+// 01 Context
+// 02 Secondary Research
+// 03 Field Research
+// 04 Ideation
+// 05 Design (IA slides, Karagir concept, Introducing Karagir, Agentic AI, Low/Mid/High fidelity)
+// 06 Testing (Usability testing material)
+// 07 Prototype (Actual working prototype in phone mockup & fullscreen)
 const SECTIONS: SectionData[] = [
   {
     id: 'context',
@@ -37,8 +41,8 @@ const SECTIONS: SectionData[] = [
     slides: [
       { filename: '2. Overview.png', alt: 'Overview & Topic - Maharashtrian Tribal & Folk Art' },
       { filename: '3. Why it matters.png', alt: 'Why it matters today - Generational Continuity' },
-      { filename: '4. Statistics.png', alt: 'Maharashtra Tribal Livelihoods & Statistics' }
-    ]
+      { filename: '4. Statistics.png', alt: 'Maharashtra Tribal Livelihoods & Statistics' },
+    ],
   },
   {
     id: 'secondary-research',
@@ -49,8 +53,8 @@ const SECTIONS: SectionData[] = [
       { filename: '6. Research.png', alt: 'Tracing the Threads of Knowledge' },
       { filename: '7. Research Literature Study.png', alt: 'Literature Study - Themes & Traditions' },
       { filename: '8. Literature Study.png', alt: 'Literature Study - Institutional Initiatives' },
-      { filename: '9. Artefact analysis.png', alt: 'Artefact Analysis - Warli, Gond, Korku, Bhil' }
-    ]
+      { filename: '9. Artefact analysis.png', alt: 'Artefact Analysis - Warli, Gond, Korku, Bhil' },
+    ],
   },
   {
     id: 'field-research',
@@ -60,8 +64,8 @@ const SECTIONS: SectionData[] = [
       { filename: '10. Primary research.png', alt: 'Documenting the visit - Tribal Cultural Museum, Pune' },
       { filename: '11. Interviews.png', alt: 'Artisan & Volunteer Interviews' },
       { filename: '12. Takeaways.png', alt: 'Key Takeaways from the Field' },
-      { filename: '13. Personas.png', alt: 'User Personas & Journey Maps' }
-    ]
+      { filename: '13. Personas.png', alt: 'User Personas & Journey Maps' },
+    ],
   },
   {
     id: 'ideation',
@@ -70,87 +74,170 @@ const SECTIONS: SectionData[] = [
     slides: [
       { filename: '14. Problem Statement.png', alt: 'The Problem Statement & Design Brief' },
       { filename: '15. Ideation.png', alt: 'Ideation & Divergent Exploration' },
-      { filename: '16. Crazy 8.png', alt: 'Crazy 8s Sketches' }
-    ]
+      { filename: '16. Crazy 8.png', alt: 'Crazy 8s Sketches' },
+    ],
   },
   {
     id: 'design',
     number: '05',
     title: 'Design',
     slides: [
-      { filename: '17. Concept.png', alt: 'The Karagir Concept' },
       { filename: '18. Info Arch.png', alt: 'Information Architecture: Artisan App' },
       { filename: '19. User flows.png', alt: 'User Flows: Voice-to-Listing & Direct Order Communication' },
-      { filename: '20. Wireframes.png', alt: 'Wireframes: Low to mid fidelity' }
-    ]
+      { filename: '17. Concept.png', alt: 'The Karagir Concept' },
+      { filename: '22. Concept.png', alt: 'Introducing Karagir: Mobile Experience' },
+      { filename: '21 Ai Agents.png', alt: 'How Agentic AI Can Help (Kala & Specialized Agents)' },
+      { filename: '20. Wireframes.png', alt: 'Wireframes: Low, Mid & High Fidelity Designs' },
+    ],
   },
   {
     id: 'testing',
     number: '06',
     title: 'Testing',
     slides: [
-      { filename: '23. Usability testing.png', alt: 'Usability Testing & Cognitive Walkthrough' }
-    ]
+      { filename: '23. Usability testing.png', alt: 'Usability Testing & Cognitive Walkthrough' },
+    ],
   },
   {
     id: 'prototype',
     number: '07',
     title: 'Prototype',
-    slides: [
-      { filename: '21 Ai Agents.png', alt: 'How Agentic AI Can Help (Kala & Specialized Agents)' },
-      { filename: '22. Concept.png', alt: 'Introducing Karagir: Mobile Experience' }
-    ]
-  }
+    slides: [],
+  },
 ];
 
 export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
   project,
   onBack,
-  onSelectProject
+  onSelectProject,
 }) => {
   const [activeSectionId, setActiveSectionId] = useState<string>('context');
-  const [selectedLanguage, setSelectedLanguage] = useState<'marathi' | 'hindi' | 'english'>('marathi');
-  const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const [isFullscreenPrototype, setIsFullscreenPrototype] = useState<boolean>(false);
+  const [fullscreenScale, setFullscreenScale] = useState<number>(1);
+  const [isBottomReached, setIsBottomReached] = useState<boolean>(false);
 
-  // Scroll to top on initial mount
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const coverVideoRef = useRef<HTMLVideoElement | null>(null);
+  const thankYouRef = useRef<HTMLDivElement | null>(null);
+  const isClickNavigatingRef = useRef<boolean>(false);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Generate safe in-memory Blob URL for the uploaded Karagir prototype HTML
+  const prototypeBlobUrl = useMemo(() => {
+    try {
+      const blob = new Blob([karagirPrototypeHtml], { type: 'text/html;charset=utf-8' });
+      return URL.createObjectURL(blob);
+    } catch {
+      return '';
+    }
   }, []);
 
-  // Set up intersection observer to detect current active section during scrolling
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    return () => {
+      if (prototypeBlobUrl) {
+        URL.revokeObjectURL(prototypeBlobUrl);
+      }
+    };
+  }, [prototypeBlobUrl]);
 
-    SECTIONS.forEach((section) => {
-      const el = document.getElementById(`section-${section.id}`);
-      if (!el) return;
+  // Handle Escape key to close fullscreen prototype modal & lock body scroll
+  useEffect(() => {
+    if (!isFullscreenPrototype) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSectionId(section.id);
-            }
-          });
-        },
-        { rootMargin: '-20% 0px -70% 0px' }
-      );
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsFullscreenPrototype(false);
+      }
+    };
 
-      observer.observe(el);
-      observers.push(observer);
-    });
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      observers.forEach((obs) => obs.disconnect());
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
     };
+  }, [isFullscreenPrototype]);
+
+  // Scroll to top on initial mount and ensure cover video plays
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (coverVideoRef.current) {
+      coverVideoRef.current.play().catch(() => {});
+    }
+  }, []);
+
+  // Compute fullscreen scale responsively so phone mockup has actual bigger screen presence
+  useEffect(() => {
+    const updateScale = () => {
+      const availH = window.innerHeight - 48;
+      const availW = window.innerWidth - 32;
+      const scaleH = availH / 874;
+      const scaleW = availW / 415;
+      // Allow scale up to 1.15 on taller viewports so phone screen is significantly bigger
+      const s = Math.min(1.15, Math.min(scaleH, scaleW));
+      setFullscreenScale(Math.max(0.6, s));
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  // Deterministic scroll spy that ensures the active section pill is consistently filled and never flickers
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isClickNavigatingRef.current) return;
+
+      const scrollPosition = window.scrollY + 160;
+
+      let currentSection = SECTIONS[0].id;
+      for (const section of SECTIONS) {
+        const el = document.getElementById(`section-${section.id}`);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            currentSection = section.id;
+          }
+        }
+      }
+
+      setActiveSectionId(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    };
+  }, []);
+
+  // Observe the final Thank You section: hides secondary navigation behind portfolio navbar
+  useEffect(() => {
+    if (!thankYouRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsBottomReached(entry.isIntersecting);
+      },
+      { rootMargin: '-10% 0px -10% 0px', threshold: 0.05 }
+    );
+
+    observer.observe(thankYouRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSectionId(sectionId);
+    isClickNavigatingRef.current = true;
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickNavigatingRef.current = false;
+    }, 900);
+
     const el = document.getElementById(`section-${sectionId}`);
     if (el) {
-      const offset = 90;
+      const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = el.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -158,53 +245,41 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
 
   const handleJumpToOutput = () => {
+    setActiveSectionId('prototype');
+    isClickNavigatingRef.current = true;
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickNavigatingRef.current = false;
+    }, 900);
+
     const el = document.getElementById('karagir-prototype-device') || document.getElementById('section-prototype');
     if (el) {
-      const yOffset = -90;
+      const yOffset = -100;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
-
-  // Previous & Next section helpers
-  const currentSectionIndex = SECTIONS.findIndex((s) => s.id === activeSectionId);
-
-  const handlePrevSection = () => {
-    if (currentSectionIndex > 0) {
-      scrollToSection(SECTIONS[currentSectionIndex - 1].id);
-    }
-  };
-
-  const handleNextSection = () => {
-    if (currentSectionIndex < SECTIONS.length - 1) {
-      scrollToSection(SECTIONS[currentSectionIndex + 1].id);
     }
   };
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-        if (e.altKey || e.metaKey) {
-          handleNextSection();
+      if (e.key === 'Escape') {
+        if (isFullscreenPrototype) {
+          setIsFullscreenPrototype(false);
+        } else {
+          onBack();
         }
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        if (e.altKey || e.metaKey) {
-          handlePrevSection();
-        }
-      } else if (e.key === 'Escape') {
-        onBack();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSectionIndex]);
+  }, [isFullscreenPrototype, onBack]);
 
   // Project navigation for bottom footer
   const prevProject = projectsData.find((p) => p.slug === 'roots') || projectsData[1];
@@ -212,25 +287,20 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] selection:bg-[#F4D000] selection:text-black relative">
-      {/* Top Left Back Navigation */}
-      <button
-        onClick={onBack}
-        className="fixed top-6 left-6 z-50 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/80 dark:bg-[#1A1A1A]/80 backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] text-[#111111] dark:text-[#F5F4EF] hover:bg-white dark:hover:bg-[#252525] text-xs font-bold font-sans shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] transition-all duration-200 cursor-pointer group"
-        aria-label="Back"
-        id="top-back-btn"
-      >
-        <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
-        <span className="inline">Back</span>
-      </button>
-
-      {/* 1. Hero Cover Slide Banner */}
+      {/* 1. Hero Cover Slide Banner with Karagir Intro Video (Cards Moving) */}
       <section className="w-full bg-[#12100E] border-b border-black/10 dark:border-white/10 relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-8">
-          <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#161311]">
-            <img
-              src="/karagir/1. cover page.png"
-              alt="Tribes of Maharashtra - Cultural Studies in UX Design"
-              className="w-full h-auto object-contain block"
+          <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-[#161311] relative group">
+            <video
+              ref={coverVideoRef}
+              src="/karagir/karagir-intro.mp4"
+              poster="/karagir/1. cover page.png"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-auto object-contain block select-none"
             />
           </div>
 
@@ -272,16 +342,18 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
         </div>
       </section>
 
-      {/* 2. Sticky Floating Capsule Navigation Bar */}
+      {/* 2. Secondary Project Navigation: Chevron + Plus/Tabs aligned directly below SANJANA */}
       <CaseStudyNav
         sections={SECTIONS}
         activeSectionId={activeSectionId}
         onSectionSelect={scrollToSection}
         accent="karagir"
         onJumpToOutput={handleJumpToOutput}
+        onBack={onBack}
+        isBottomReached={isBottomReached}
       />
 
-      {/* 3. The Continuous Case Study Content: 7 Sections with Full Readable PNG Slides */}
+      {/* 3. The Continuous Case Study Content: 7 Ordered Sections */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-20">
         {SECTIONS.map((section) => (
           <section
@@ -289,8 +361,12 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
             id={`section-${section.id}`}
             className="mb-20 scroll-mt-28"
           >
-            {/* Section Header Matching Video Reference */}
-            <div className="flex items-center gap-3 mb-6 pt-4 border-t border-[#E5E2D6] dark:border-[#222222]">
+            {/* Section Header */}
+            <div
+              className={`flex items-center gap-3 mb-6 pt-4 border-t border-[#E5E2D6] dark:border-[#222222] ${
+                section.id === 'prototype' ? 'pt-16 sm:pt-20 mt-8 sm:mt-12' : ''
+              }`}
+            >
               <span className="text-sm font-sans text-[#5C1D24] dark:text-[#F4D000] font-bold">
                 {section.number}
               </span>
@@ -315,42 +391,35 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
                 </div>
               ))}
 
-              {/* Special Addition in Section 07 (Prototype): Interactive Mobile Device & Thank You */}
+              {/* Section 07 (Prototype): Actual Karagir prototype inside Phone Mockup */}
               {section.id === 'prototype' && (
-                <div className="pt-8 space-y-12">
-                  {/* The Interactive Phone Device running Karagir Prototype */}
-                  <div id="karagir-prototype-device" className="flex flex-col items-center scroll-mt-28">
-                    <div className="w-full max-w-[380px] rounded-[48px] border-[8px] border-[#1C1B19] bg-[#111111] shadow-2xl p-2 relative overflow-hidden ring-1 ring-black/10 dark:ring-white/20">
-                      {/* Dynamic Island Pill */}
-                      <div className="w-24 h-4 bg-black rounded-full mx-auto my-2" />
-
-                      <div className="w-full h-[680px] rounded-[36px] overflow-hidden bg-white">
-                        <iframe
-                          src="/karagir-prototype.html"
-                          title="Karagir Interactive Prototype"
-                          className="w-full h-full border-none block"
-                        />
-                      </div>
+                <div className="pt-2">
+                  {/* Smaller Phone Mockup: Uses the actual uploaded Karagir prototype */}
+                  <div id="karagir-prototype-device" className="flex flex-col items-center scroll-mt-28 py-2">
+                    <div className="relative box-content w-[216px] h-[468px] rounded-[36px] border-[7px] border-[#1C1A17] dark:border-[#2C2A26] bg-[#0E0D0B] shadow-[0_16px_44px_-10px_rgba(0,0,0,0.35)] ring-1 ring-black/10 dark:ring-white/10 select-none overflow-hidden">
+                      <iframe
+                        srcDoc={karagirPrototypeHtml}
+                        src={prototypeBlobUrl || undefined}
+                        title="Karagir Interactive Prototype"
+                        allow="autoplay"
+                        className="w-[393px] h-[852px] border-none block"
+                        style={{
+                          transform: 'scale(0.549618)',
+                          transformOrigin: '0 0',
+                        }}
+                      />
                     </div>
 
+                    {/* Open Full Screen Button below Mockup */}
                     <button
                       type="button"
                       onClick={() => setIsFullscreenPrototype(true)}
-                      className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#5C1D24] dark:bg-[#F4D000] text-white dark:text-black hover:bg-[#7D1B1B] dark:hover:bg-[#E5C200] text-xs font-sans font-bold shadow-md cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
+                      className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5C1D24] dark:bg-[#F4D000] text-white dark:text-black hover:bg-[#7D1B1B] dark:hover:bg-[#E5C200] text-xs font-sans font-bold shadow-sm hover:shadow-md cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
                       id="prototype-fullscreen-btn"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
-                      <span>Open full screen</span>
+                      <span>Open Full Screen</span>
                     </button>
-                  </div>
-
-                  {/* Thank You Slide (Frame 00:35) */}
-                  <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-black/10 dark:border-white/10 bg-[#350A0B]">
-                    <img
-                      src="/karagir/24. thank you.png"
-                      alt="Thank you - Karagir"
-                      className="w-full h-auto object-contain block"
-                    />
                   </div>
                 </div>
               )}
@@ -358,43 +427,68 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
           </section>
         ))}
 
-        {/* 4. Footer Project Pagination Cards */}
-        <CaseStudyPagination
-          prevProject={prevProject}
-          nextProject={nextProject}
-          onSelectProject={onSelectProject}
-        />
+        {/* 4. Thank You Section: Dedicated section observed to hide secondary navigation */}
+        <section id="section-thank-you" ref={thankYouRef} className="pt-4 pb-12 scroll-mt-28">
+          <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-black/10 dark:border-white/10 bg-[#350A0B]">
+            <img
+              src="/karagir/24. thank you.png"
+              alt="Thank you - Karagir"
+              className="w-full h-auto object-contain block"
+            />
+          </div>
+        </section>
+
+        {/* 5. Footer Project Pagination & Transition Area */}
+        <div id="case-study-bottom-area">
+          <CaseStudyPagination
+            prevProject={prevProject}
+            nextProject={nextProject}
+            onSelectProject={onSelectProject}
+          />
+        </div>
       </main>
 
-      {/* In-Place Fullscreen Prototype Modal (No Redirection) */}
+      {/* In-Place Fullscreen Prototype Modal: Larger Phone Mockup using the EXACT same prototype source */}
       {isFullscreenPrototype && (
         <div
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-0 m-0 overflow-hidden"
           id="prototype-fullscreen-modal"
+          onClick={() => setIsFullscreenPrototype(false)}
         >
-          {/* Top Bar with Close / Exit Fullscreen */}
-          <div className="w-full max-w-md flex items-center justify-between px-2 py-2 text-white mb-2">
-            <div className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#F4D000]">
-              <span className="w-2 h-2 rounded-full bg-[#F4D000] animate-pulse" />
-              <span>Karagir Prototype</span>
-            </div>
+          {/* Floating Top Close Button */}
+          <div
+            className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setIsFullscreenPrototype(false)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/30 text-white text-xs font-sans font-bold transition-colors cursor-pointer"
-              aria-label="Close full screen"
+              className="p-2.5 rounded-full bg-black/80 hover:bg-black text-white transition-all cursor-pointer shadow-lg border border-white/20 hover:scale-110 active:scale-95 flex items-center justify-center backdrop-blur-md"
+              aria-label="Close full screen (Escape)"
+              title="Close (Esc)"
               id="close-fullscreen-btn"
             >
-              <X className="w-4 h-4" />
-              <span>Close</span>
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="w-full max-w-[400px] h-[85vh] max-h-[840px] rounded-[44px] overflow-hidden border-4 border-white/20 shadow-2xl bg-white relative">
-            <iframe
-              src="/karagir-prototype.html"
-              title="Karagir Fullscreen Prototype"
-              className="w-full h-full border-0 block"
-            />
+          {/* Centered Phone Mockup presentation */}
+          <div
+            className="relative flex items-center justify-center select-none"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              transform: `scale(${fullscreenScale})`,
+              transformOrigin: 'center center',
+            }}
+          >
+            <div className="relative box-content w-[393px] h-[852px] rounded-[56px] border-[11px] border-[#1C1A17] bg-[#0D0C0A] shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.15)] overflow-hidden">
+              <iframe
+                srcDoc={karagirPrototypeHtml}
+                src={prototypeBlobUrl || undefined}
+                title="Karagir Fullscreen Prototype"
+                allow="autoplay"
+                className="w-[393px] h-[852px] border-none block"
+              />
+            </div>
           </div>
         </div>
       )}

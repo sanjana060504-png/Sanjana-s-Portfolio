@@ -245,17 +245,6 @@ export const ThingsIveTried: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Interactive Cue */}
-      <div className="mt-10 pt-6 border-t border-[#E5E2D6]/60 dark:border-[#252525]/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="font-handwriting text-2xl text-[#111111] dark:text-[#F5F4EF]">
-          “Different fields. Same curiosity.”
-        </p>
-        <div className="text-xs font-sans text-[#8E8D88]">
-          Hover any discipline above (e.g. Drama, Fashion, Photography, Physical Making) to watch the video
-        </div>
-      </div>
     </section>
   );
 };
-

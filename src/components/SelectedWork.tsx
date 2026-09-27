@@ -30,7 +30,7 @@ const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ project, onOpenProjec
   }, []);
 
   const handleMouseEnter = () => {
-    if (project.hoverVideo && canHover) {
+    if (project.hoverVideo) {
       setIsHovered(true);
       if (videoRef.current) {
         videoRef.current.currentTime = 0;
@@ -49,16 +49,16 @@ const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ project, onOpenProjec
     }
   };
 
-  // Respective project hover styling (burgundy for karagir, blue for edsuit crm, cyan for exam portal)
-  // Default states retain the signature yellow/black styling
+  // Respective project hover styling
+  // Karagir: Burgundy (#641722), CRM: Blue (#0284C7), Exam Portal: Teal (#01ABA7)
   const projectTheme = {
     karagir: {
-      cardHover: 'hover:border-[#5C1D24]/70 dark:hover:border-[#F4D000]/60 hover:bg-white/80 dark:hover:bg-[#1C1C1C]/80',
-      titleHover: 'group-hover:text-[#5C1D24] dark:group-hover:text-[#F4D000]',
-      arrowHover: 'group-hover:bg-[#5C1D24] group-hover:text-white',
-      numberHover: 'group-hover:text-[#5C1D24] dark:group-hover:text-[#F4D000]',
-      mobileNumberHover: 'group-hover:bg-[#5C1D24] group-hover:text-white',
-      tagBorderHover: 'group-hover:border-[#5C1D24]/40',
+      cardHover: 'hover:border-[#641722] dark:hover:border-[#641722] hover:shadow-[0_8px_30px_rgba(100,23,34,0.18)] hover:bg-white/90 dark:hover:bg-[#1C1C1C]/90',
+      titleHover: 'group-hover:text-[#641722] hover:text-[#641722] dark:group-hover:text-[#641722] dark:hover:text-[#641722]',
+      arrowHover: 'group-hover:bg-[#641722] group-hover:text-white',
+      numberHover: 'group-hover:text-[#641722] dark:group-hover:text-[#641722]',
+      mobileNumberHover: 'group-hover:bg-[#641722] group-hover:text-white',
+      tagBorderHover: 'group-hover:border-[#641722]/60 dark:group-hover:border-[#641722]/60',
     },
     'edsuite-crm': {
       cardHover: 'hover:border-[#0284C7]/70 dark:hover:border-[#38BDF8]/60 hover:bg-white/80 dark:hover:bg-[#1C1C1C]/80',
@@ -105,12 +105,7 @@ const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ project, onOpenProjec
         {/* Compact Contained Thumbnail / Hover Video */}
         <div className="relative w-full md:w-56 lg:w-64 h-48 md:h-38 rounded-2xl overflow-hidden bg-[#EFECE3] dark:bg-[#222222] shrink-0">
           <img
-            src={
-              project.thumbnail.startsWith('http') &&
-              !project.thumbnail.match(/\.(png|jpg|jpeg|webp|svg)$/i)
-                ? '/karagir-cover.svg'
-                : project.thumbnail
-            }
+            src={project.thumbnail}
             alt={project.title}
             className={`w-full h-full object-cover object-center transition-all duration-300 ${
               isHovered && project.hoverVideo ? 'opacity-0' : 'opacity-100 group-hover:scale-105'
@@ -125,7 +120,17 @@ const ProjectCardItem: React.FC<ProjectCardItemProps> = ({ project, onOpenProjec
               muted
               playsInline
               loop
-              preload="metadata"
+              preload="auto"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (project.slug === 'edsuite-crm' && !target.src.includes('CRM.mp4')) {
+                  target.src = '/edsuite/CRM.mp4';
+                  target.play().catch(() => {});
+                } else if (project.slug === 'exam-portal' && !target.src.includes('EXAMS.mp4')) {
+                  target.src = '/edsuite/EXAMS.mp4';
+                  target.play().catch(() => {});
+                }
+              }}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none ${
                 isHovered ? 'opacity-100' : 'opacity-0'
               }`}

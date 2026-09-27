@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowDown, ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowDown, Sparkles } from 'lucide-react';
 import { personalProfile } from '../data/portfolioData.ts';
+import { HandwrittenSmiley } from './HandwrittenSmiley.tsx';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -9,38 +10,6 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
   const [blobWiggle, setBlobWiggle] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // The remaining 2 profile photos of Sanjana for this hero carousel
-  const remainingPhotos = [
-    {
-      src: "/profile%202.jpeg",
-      label: "Profile 02",
-    },
-    {
-      src: "/profile%203.jpeg",
-      label: "Profile 03",
-    },
-  ];
-
-  useEffect(() => {
-    if (isHovered) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % remainingPhotos.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isHovered, remainingPhotos.length]);
-
-  const handlePrevSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentSlide((prev) => (prev - 1 + remainingPhotos.length) % remainingPhotos.length);
-  };
-
-  const handleNextSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentSlide((prev) => (prev + 1) % remainingPhotos.length);
-  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -59,17 +28,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
         {/* Left Column: Personality-First Typography */}
         <div className="lg:col-span-7 flex flex-col items-start z-10">
           {/* Subtle Tag / Greeting */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFECE3] dark:bg-[#222222] border border-[#E5E2D6] dark:border-[#2C2C2C] mb-4 sm:mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#F4D000] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFECE3] dark:bg-[#222222] border border-[#E5E2D6] dark:border-[#2C2C2C] mb-4 sm:mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#F4D000] animate-pulse shrink-0" />
             <span className="text-xs font-semibold tracking-wide uppercase text-[#605E59] dark:text-[#B0AEA8]">
-              {personalProfile.role}
+              UX &amp; Product Designer · Student at MIT Institute of Design
             </span>
           </div>
 
-          {/* Main Statement */}
+          {/* Main Statement with "hello!" instead of "hi!" */}
           <div className="relative mb-4 sm:mb-5">
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-[#111111] dark:text-[#F5F4EF] leading-[1.05]">
-              hi! <br />
+              hello! <br />
               <span className="relative inline-block">
                 I’m Sanjana.
                 {/* Underline gesture */}
@@ -96,23 +65,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
             {personalProfile.heroStatement}
           </p>
 
-          {/* Action Row & Handwritten Annotation */}
-          <div className="flex flex-wrap items-center gap-5 sm:gap-8">
-            <button
-              onClick={onExploreClick}
-              className="group relative inline-flex items-center gap-3 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-[#111111] dark:bg-[#F4D000] text-[#FFFFFF] dark:text-[#111111] font-bold text-sm sm:text-base tracking-tight hover:bg-[#F4D000] hover:text-[#111111] dark:hover:bg-[#FFFFFF] dark:hover:text-[#111111] transition-all duration-300 shadow-sm focus:outline-none focus-visible:ring-4 focus-visible:ring-[#F4D000]/50"
-              id="hero-explore-btn"
-              data-cursor="explore"
-            >
-              <span>See what I’ve been making</span>
-              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
-            </button>
-
-            {/* Handwritten note pointing to action */}
-            <div className="hidden sm:flex items-center gap-2 font-handwriting text-2xl text-[#605E59] dark:text-[#B0AEA8] select-none -rotate-2">
-              <span>always up for something new</span>
-              <Sparkles className="w-4 h-4 text-[#F4D000]" />
-            </div>
+          {/* Handwritten Annotation */}
+          <div className="flex items-center gap-2 font-handwriting text-2xl text-[#605E59] dark:text-[#B0AEA8] select-none -rotate-2">
+            <span>let’s see where this goes</span>
+            <Sparkles className="w-5 h-5 text-[#F4D000] inline-block animate-pulse shrink-0" />
           </div>
         </div>
 
@@ -142,95 +98,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
               />
             </svg>
 
-            {/* Carousel Portrait Inside / In Front */}
+            {/* Main Portrait Card (Photo with adjusted object position to move person up) */}
             <div
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              onClick={handleNextSlide}
-              className="absolute inset-4 sm:inset-5 rounded-3xl overflow-hidden shadow-xl border-4 border-[#F7F6F0] dark:border-[#181818] bg-[#EFECE3] dark:bg-[#222222] group cursor-pointer select-none"
-              title="Click or use arrows to view next photo"
+              className="absolute inset-4 sm:inset-5 rounded-3xl overflow-hidden shadow-xl border-4 border-[#F7F6F0] dark:border-[#181818] bg-[#EFECE3] dark:bg-[#222222] group select-none"
             >
-              {/* Image Slides with smooth crossfade */}
-              <div className="relative w-full h-full">
-                {remainingPhotos.map((photo, idx) => (
-                  <img
-                    key={photo.src}
-                    src={photo.src}
-                    alt={`Sanjana Deshmukh Portrait ${idx + 1}`}
-                    className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-in-out group-hover:scale-105 ${
-                      currentSlide === idx
-                        ? 'opacity-100 scale-100'
-                        : 'opacity-0 scale-105 pointer-events-none'
-                    }`}
-                  />
-                ))}
-              </div>
+              <img
+                src="/profile.jpeg"
+                alt="Sanjana Deshmukh"
+                className="w-full h-full object-cover object-[center_35%] transition-all duration-500 group-hover:scale-105"
+              />
 
-              {/* Bottom Subtle Gradient for Text Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none z-10" />
+              {/* Gradient Vignette for Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none z-10" />
 
-              {/* Carousel Dot Indicators in TOP-RIGHT */}
-              <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-xs border border-white/15">
-                {remainingPhotos.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentSlide(idx);
-                    }}
-                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                      currentSlide === idx ? 'w-4 bg-[#F4D000]' : 'w-1.5 bg-white/50 hover:bg-white/90'
-                    }`}
-                    aria-label={`Go to photo ${idx + 1}`}
-                    title={`Photo ${idx + 1} of ${remainingPhotos.length}`}
-                  />
-                ))}
-              </div>
-
-              {/* Navigation Arrows (visible on hover) */}
-              <div className="absolute inset-y-0 inset-x-2 flex items-center justify-between pointer-events-none z-20">
-                <button
-                  onClick={handlePrevSlide}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/45 hover:bg-black/85 backdrop-blur-xs text-white flex items-center justify-center border border-white/20 transition-all opacity-0 group-hover:opacity-100 hover:scale-110 pointer-events-auto cursor-pointer shadow-md"
-                  aria-label="Previous photo"
-                  title="Previous photo"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleNextSlide}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/45 hover:bg-black/85 backdrop-blur-xs text-white flex items-center justify-center border border-white/20 transition-all opacity-0 group-hover:opacity-100 hover:scale-110 pointer-events-auto cursor-pointer shadow-md"
-                  aria-label="Next photo"
-                  title="Next photo"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Bottom Caption Overlay without 'Pune, India' */}
-              <div className="absolute bottom-3 left-3 right-3 text-white pointer-events-none z-20">
-                <span className="text-xs font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
-                  Designing with intent & curiosity
-                </span>
+              {/* Photo Caption */}
+              <div className="absolute bottom-3.5 sm:bottom-4 left-3.5 sm:left-4 right-3.5 sm:right-4 z-20 pointer-events-none">
+                <p className="text-xs sm:text-sm font-medium text-white/95 leading-snug drop-shadow-md">
+                  Making things make sense.
+                </p>
               </div>
             </div>
 
-            {/* Tactile Black Slate Note in TOP-LEFT Corner */}
+            {/* Slate Note: Moved upwards with new text */}
             <div
-              className="absolute -top-3 -left-3 sm:-top-5 sm:-left-5 bg-[#121212] text-white px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl shadow-xl border-2 border-[#242424] rotate-[-5deg] hover:rotate-0 transition-transform duration-300 select-none max-w-[210px] z-20 pointer-events-auto"
-              style={{
-                backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px)',
-                backgroundSize: '12px 12px',
-              }}
+              className="absolute top-1 -left-2 sm:top-2 sm:-left-4 bg-[#121212] text-white px-4 py-3 rounded-2xl shadow-2xl border-2 border-white rotate-[-5deg] hover:rotate-0 transition-transform duration-300 select-none max-w-[230px] z-20 pointer-events-auto"
             >
-              <div className="flex items-center gap-1.5 mb-1 opacity-60">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F4D000]" />
-                <span className="text-[9px] font-sans font-bold uppercase tracking-widest text-[#B0AEA8]">
-                  SLATE
-                </span>
-              </div>
               <p className="font-handwriting text-base sm:text-lg text-[#F4D000] leading-tight drop-shadow-[0_1px_2px_rgba(244,208,0,0.25)]">
-                Same person who overthinks and says “let's try it!” ◡̈
+                Same person who says “it’s probably fine” and still <span className="inline-block whitespace-nowrap">fixes it. <HandwrittenSmiley className="w-4 h-4 text-[#F4D000] inline-block align-baseline -translate-y-0.5 ml-0.5" variant="regular" /></span>
               </p>
             </div>
           </div>
@@ -238,19 +132,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
       </div>
 
       {/* Bottom Subtle Scroll Indicator */}
-      <div className="pt-8 flex items-center justify-between border-t border-[#E5E2D6]/60 dark:border-[#252525]/60 mt-8">
+      <div className="pt-8 flex items-center border-t border-[#E5E2D6]/60 dark:border-[#252525]/60 mt-8">
         <button
           onClick={onExploreClick}
-          className="group flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#8E8D88] hover:text-[#111111] dark:hover:text-[#F5F4EF] transition-colors focus:outline-none"
+          className="group flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider text-[#8E8D88] hover:text-[#111111] dark:hover:text-[#F5F4EF] transition-colors focus:outline-none cursor-pointer"
           id="hero-scroll-cue"
         >
           <ArrowDown className="w-3.5 h-3.5 text-[#F4D000] animate-bounce" />
           <span>keep scrolling</span>
         </button>
-
-        <div className="text-xs font-sans text-[#8E8D88]">
-          Work & Experiments (2025–2026)
-        </div>
       </div>
     </section>
   );

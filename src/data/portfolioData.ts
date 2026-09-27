@@ -4,12 +4,12 @@ export const personalProfile: PersonalProfile = {
   name: "Sanjana Deshmukh",
   role: "UX / Product Designer",
   heroGreeting: "Hello! I’m Sanjana.",
-  heroStatement: "I design digital and physical experiences, and I’m usually curious enough to try something new.",
+  heroStatement: "I design digital experiences that feel simple, thoughtful, and useful and I’m always up for making something beyond a screen.",
   corePhilosophy: "Every experience is worth a try.",
   wittyLine: "Curiosity has questionable consequences, but I’d still choose it.",
-  email: "sanjana060504@gmail.com",
+  email: "Sanjana060504@gmail.com",
   linkedin: "https://www.linkedin.com/in/sanjana-deshmukh-ba9863276/$0",
-  behance: "https://www.behance.net/sanjanadeshmukh5$0",
+  behance: "https://www.behance.net/sanjanad6",
   instagram: "https://www.instagram.com/sanjananaaaah/$0",
   resumeUrl: "#resume",
   location: "Pune, India",
@@ -19,34 +19,35 @@ export const personalProfile: PersonalProfile = {
     "/profile%203.jpeg"
   ],
   careAbout: [
-    "Designing with empathy",
-    "Trying new things",
-    "Good conversations",
-    "Art, culture & everyday life",
-    "Making ideas real",
+    "Staying updated",
+    "Listening well, talking better",
+    "Usability testing",
+    "Human psychology",
+    "Thinking things through",
+    "Making everyday life better",
     "Sensory interactions",
     "Tangible interfaces",
   ],
   bioSections: [
     {
       heading: "Who I am",
-      text: "I’m a UX/Product Design student who loves exploring how people, technology, and everyday life come together. I’m curious by nature and tend to say yes to things — because every experience teaches me something unexpected."
+      text: "I’m a UX/Product Design student who loves exploring how people, technology, and everyday life come together. I’m curious by nature and tend to say yes to things because, somewhere along the way, I’ve learned along the way that there’s always something unexpected yet useful to take away."
     },
     {
       heading: "How I work",
-      text: "I begin with honest observation. Before opening Figma, I talk to people, sketch messy thoughts on paper, deconstruct the problem, and look for the emotional core behind user habits. Then I prototype fast to test assumptions."
+      text: "I begin with honest observation. Before opening Figma, I talk to people, sketch messy thoughts on paper, deconstruct the problem, and look for the emotional core behind user habits. Then I prototype fast to test assumptions. There isn’t always a straight path through a project; sometimes flipping the process around is exactly what makes it work."
     },
     {
-      heading: "What I’m curious about",
-      text: "I’m fascinated by tangible interfaces, agentic AI assistants that feel like calm collaborators rather than chat spam, and how digital products can inspire genuine real-world connection instead of screen addiction."
+      heading: "What I’d love to work on",
+      text: "I’m fascinated by why people behave the way they do, especially the habits and little decisions hiding behind everyday actions. I’d love to explore more work with niche audiences too, especially kids, where play, hands-on interaction, testing, and feedback can completely change the way something is designed."
     },
     {
       heading: "What I make",
-      text: "End-to-end digital products, micro-interaction systems, service design blueprints, physical wire-and-craft prototypes, and interactive experiences that invite genuine delight."
+      text: "I work across digital products, interactions, services, and physical prototypes. From a rough idea to something people can actually interact with, I like building, testing, learning, and figuring out what works."
     },
     {
-      heading: "Things I keep learning",
-      text: "Creative coding, 3D modeling in Spline, darkroom film printing, and the subtle art of knowing when a layout is done versus when it’s just overthought."
+      heading: "What else",
+      text: "Exploring how different tools can work together, especially AI, and where they can genuinely make the process faster, smarter, or just better. Mostly by trying things out, figuring out what works, and finding ways to make them part of my process."
     }
   ]
 };
@@ -206,6 +207,7 @@ export const projectsData: Project[] = [
     year: "2026",
     tags: ["Cultural Studies", "UX / Product Design", "Agentic AI", "Mobile Ecosystem"],
     thumbnail: "/karagir/1. cover page.png",
+    hoverVideo: "/karagir/karagir-intro.mp4",
     heroImage: "/karagir/1. cover page.png",
     role: "Lead UX / Product Designer & Researcher",
     duration: "Academic Project",
@@ -292,18 +294,18 @@ export const projectsData: Project[] = [
     id: "project-edsuite-crm",
     slug: "edsuite-crm",
     number: "02",
-    title: "edsuit CRM",
+    title: "CRM",
     shortDescription: "A B2B SaaS CRM and management product focused on managing inquiries, follow-ups, and operational workflows.",
     fullDescription: "edsuit CRM is a B2B SaaS CRM and management product focused on managing inquiries, follow-ups and related workflows. My main involvement centered on UI/UX design, detailed screen design in Figma, working through iterations and redesigns, deployment, testing, and fixing/reworking issues after testing.",
     category: "Product & UI / Screen Design × B2B SaaS",
     year: "2026",
     tags: ["UI / Screen Design in Figma", "B2B SaaS CRM", "Iterations & Redesign", "Testing & Deployment"],
-    thumbnail: "/edsuite/edsuite-thumbnail.png",
-    hoverVideo: "/edsuite/EdSuit_CRM_logo_intro_202607131741.mp4",
+    thumbnail: "/edsuite/CRM dash 1.png",
+    hoverVideo: "/edsuite/CRM.mp4",
     heroImage: "/edsuite/CRM dash 1.png",
     role: "UI & Screen Designer",
-    duration: "Product Cycle",
-    team: "Product & Engineering Collaboration",
+    duration: "Student Project (2026)",
+    team: "Student Initiative",
     tools: ["Figma", "Design System", "Testing & QA", "Deployment Handoff"],
     prevProjectSlug: "karagir",
     nextProjectSlug: "exam-portal",
@@ -379,8 +381,8 @@ export const projectsData: Project[] = [
     category: "Product & UI Design × Assessment Platform",
     year: "2026",
     tags: ["UI / Screen Design in Figma", "Google Stitch", "Developer Handoff", "Testing & Deployment"],
-    thumbnail: "/edsuite/Admin.png",
-    hoverVideo: "/edsuite/edsuit EXAMS.mp4",
+    thumbnail: "/edsuite/exam-thumbnail.png?v=last-second",
+    hoverVideo: "/edsuite/EXAMS.mp4",
     heroImage: "/edsuite/Admin.png",
     role: "UI & Product Designer",
     duration: "Product Cycle",
