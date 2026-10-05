@@ -90,8 +90,8 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
     }
   };
 
-  const prevProject = projectsData.find((p) => p.slug === 'edsuite-crm') || projectsData[1];
-  const nextProject = projectsData.find((p) => p.slug === 'karagir') || projectsData[0];
+  const prevProject = projectsData.find((p) => p.slug === 'karagir') || projectsData[1];
+  const nextProject = projectsData.find((p) => p.slug === 'edsuite-crm') || projectsData[0];
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] selection:bg-[#01ABA7] selection:text-white transition-colors duration-200 relative">

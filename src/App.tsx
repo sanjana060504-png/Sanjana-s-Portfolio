@@ -4,15 +4,16 @@ import CustomCursor from './components/CustomCursor.tsx';
 import { HeroSection } from './components/HeroSection.tsx';
 import { CuriousByDefault } from './components/CuriousByDefault.tsx';
 import { ToolsSection } from './components/ToolsSection.tsx';
-import { ExperienceSection } from './components/ExperienceSection.tsx';
 import { SelectedWork } from './components/SelectedWork.tsx';
 import { PlaygroundSection } from './components/PlaygroundSection.tsx';
 import { AboutSection } from './components/AboutSection.tsx';
+import { ExperienceSection } from './components/ExperienceSection.tsx';
 import { FooterSection } from './components/FooterSection.tsx';
 import { ResumeModal } from './components/ResumeModal.tsx';
 import { KaragirCaseStudy } from './pages/KaragirCaseStudy.tsx';
 import { CRMCaseStudy } from './pages/CRMCaseStudy.tsx';
 import { CaseStudyView } from './pages/CaseStudyView.tsx';
+import { PresentationCaseStudy } from './pages/PresentationCaseStudy.tsx';
 import { Project } from './types.ts';
 
 export function App() {
@@ -104,8 +105,17 @@ export function App() {
               }}
               onSelectProject={(p) => handleOpenProject(p)}
             />
-          ) : (
+          ) : selectedProject.slug === 'exam-portal' ? (
             <CaseStudyView
+              project={selectedProject}
+              onBack={() => {
+                setCurrentView('home');
+                handleNavigate('selected-work');
+              }}
+              onSelectProject={(p) => handleOpenProject(p)}
+            />
+          ) : (
+            <PresentationCaseStudy
               project={selectedProject}
               onBack={() => {
                 setCurrentView('home');
@@ -130,14 +140,14 @@ export function App() {
             {/* Section 04: About Me */}
             <AboutSection />
 
+            {/* Experience Section: Minimal Horizontal Timeline */}
+            <ExperienceSection />
+
             {/* Section 02: Exploration (Intro & Visual Memory Stage) */}
             <CuriousByDefault />
 
             {/* Section 07: Tools I Work With (Compact Moving Toolkit Strip) */}
             <ToolsSection />
-
-            {/* Section 08: Experience (Personal Journey Timeline) */}
-            <ExperienceSection />
 
             {/* Playground Section: Leave a Note desk experience (just before contact) */}
             <PlaygroundSection />

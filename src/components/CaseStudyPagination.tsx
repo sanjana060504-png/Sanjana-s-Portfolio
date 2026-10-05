@@ -30,6 +30,21 @@ export const CaseStudyPagination: React.FC<CaseStudyPaginationProps> = ({
           card: 'hover:border-[#01ABA7]/40 dark:hover:border-[#22D3EE]/40 hover:shadow-[0_16px_36px_-6px_rgba(1,171,167,0.12)]',
           text: 'group-hover:text-[#01ABA7] dark:group-hover:text-[#22D3EE]',
         };
+      case 'sustainability-ux':
+        return {
+          card: 'hover:border-[#D3FA53] hover:shadow-[0_16px_36px_-6px_rgba(211,250,83,0.18)]',
+          text: 'group-hover:text-[#D3FA53]',
+        };
+      case 'service-design':
+        return {
+          card: 'hover:border-[#C8B6FF] hover:shadow-[0_16px_36px_-6px_rgba(200,182,255,0.18)]',
+          text: 'group-hover:text-[#C8B6FF]',
+        };
+      case 'special-needs':
+        return {
+          card: 'hover:border-[#3DBCF9] hover:shadow-[0_16px_36px_-6px_rgba(61,188,249,0.18)]',
+          text: 'group-hover:text-[#3DBCF9]',
+        };
       default:
         return {
           card: 'hover:border-[#F4D000]/40 hover:shadow-[0_16px_36px_-6px_rgba(244,208,0,0.12)]',

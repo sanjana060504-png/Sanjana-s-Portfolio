@@ -197,10 +197,93 @@ export const toolsData: ToolItem[] = [
 
 export const projectsData: Project[] = [
   {
+    id: "project-edsuite-crm",
+    slug: "edsuite-crm",
+    number: "01",
+    title: "CRM",
+    readTime: "6 min read",
+    shortDescription: "A B2B SaaS CRM and management product focused on managing inquiries, follow-ups, and operational workflows.",
+    fullDescription: "edsuit CRM is a B2B SaaS CRM and management product focused on managing inquiries, follow-ups and related workflows. My main involvement centered on UI/UX design, detailed screen design in Figma, working through iterations and redesigns, deployment, testing, and fixing/reworking issues after testing.",
+    category: "Product & UI / Screen Design × B2B SaaS",
+    year: "2026",
+    tags: ["UI / Screen Design in Figma", "B2B SaaS CRM", "Iterations & Redesign", "Testing & Deployment"],
+    thumbnail: "/edsuite/crm-frame-3s.png",
+    hoverVideo: "/edsuite/EdSuit_CRM_logo_intro_202607131741.mp4",
+    heroImage: "/edsuite/CRM dash 1.png",
+    role: "UX & UI Designer",
+    duration: "Summer Internship · 2026",
+    team: "Student Initiative",
+    tools: ["Figma", "Design System", "Testing & QA", "Deployment Handoff"],
+    prevProjectSlug: "special-needs",
+    nextProjectSlug: "karagir",
+    context: {
+      title: "Context & Operational Scope",
+      subtitle: "High-volume inquiry triage, scheduled follow-ups, and pipeline visibility",
+      content: "B2B teams face high daily incoming volume across diverse channels. Without a structured workflow, inquiries slip through cracks, callback reminders are missed, and pipeline velocity drops.",
+      keyPoints: [
+        "Inquiry Ingestion: Centralizing incoming leads from forms, phone, and outreach campaigns.",
+        "Follow-up Discipline: Providing teams with priority queues and instant callback logging.",
+        "Operational Transparency: Clear pipeline stages to track deal movement and team productivity."
+      ]
+    },
+    research: {
+      title: "Design System Foundations",
+      subtitle: "Reusable component tokens and data-dense patterns in Figma",
+      content: "Created a comprehensive Figma design system tailored for operational clarity, consistent status pill taxonomy, responsive data tables, and modal triggers.",
+      keyPoints: [
+        "Consistent color tokens and typographic hierarchy for rapid row scanning",
+        "Modular table row layouts supporting inline status updates and quick actions",
+        "Form input states, validation badges, and high-contrast alert indicators"
+      ]
+    },
+    exploration: {
+      title: "UI Design & Screen Explorations",
+      subtitle: "Balancing high information density with interface clarity",
+      content: "Designed the complete dashboard, all-leads directory, and visual pipeline kanban in Figma to support power users throughout their full workday.",
+      keyPoints: [
+        "Dashboard overview with daily dispatch counters and activity charts",
+        "Filterable lead tables with instant search and batch actions",
+        "Multi-stage opportunity pipeline with drag-and-drop workflow"
+      ]
+    },
+    process: {
+      title: "Testing & User Feedback",
+      subtitle: "Validating workflows under live team conditions",
+      content: "Conducted usability testing with active users to identify bottlenecks in call logging, lead updates, and navigation during active phone calls.",
+      keyPoints: [
+        "Noticed context switching friction when navigating away from the active list",
+        "Identified the need for immediate one-tap disposition logs after calls",
+        "Refined status tags to prevent ambiguous lead states"
+      ]
+    },
+    solution: {
+      title: "Iterations, Redesign & Deployment",
+      subtitle: "Reworking problem areas and shipping production fixes",
+      content: "Reworked the lead inspection flow into a streamlined sliding panel, simplified follow-up creation, and collaborated closely with engineering through deployment and bug fixes.",
+      keyPoints: [
+        "Sliding inspection panel that preserves table scroll and active filter state",
+        "Quick-entry follow-up drawer reducing callback scheduling time",
+        "Post-deployment testing and design QA to fix edge-case UI regressions"
+      ]
+    },
+    outcome: {
+      title: "Production Workspace Delivery",
+      subtitle: "A cohesive, dependable B2B operational tool",
+      content: "Delivered a refined, complete CRM experience that keeps inquiries organized, clarifies daily follow-up responsibilities, and provides team leads with transparent activity metrics."
+    },
+    reflection: {
+      title: "Product Walkthrough & Reflection",
+      subtitle: "Designing for operational efficiency",
+      content: "Working on edsuit CRM underscored that great B2B UI is measured by how seamlessly it supports repetitive daily work. Eliminating small frictions adds up to massive gains in team focus and reliability.",
+      quote: "B2B software succeeds when it respects the user's focus and makes complex tasks feel second nature."
+    }
+  },
+  {
     id: "project-karagir",
     slug: "karagir",
-    number: "01",
+    number: "02",
     title: "KARAGIR",
+    readTime: "8 min read",
     shortDescription: "A mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs and cultural organisations through craft, community and storytelling.",
     fullDescription: "A mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs and cultural organisations through craft, community and storytelling. The project explores how technology can help artisans present, promote and connect their work while keeping the maker and cultural story visible. Driven by Kala, an agentic AI working alongside artisans to bridge the gap between traditional craft and modern discovery.",
     category: "Cultural Studies × UX / Product Design × Agentic AI",
@@ -213,8 +296,8 @@ export const projectsData: Project[] = [
     duration: "Academic Project",
     team: "Solo UX Research & Product Design",
     tools: ["Figma", "Field Research", "Cultural Mapping", "Kala AI Architecture"],
-    prevProjectSlug: "exam-portal",
-    nextProjectSlug: "edsuite-crm",
+    prevProjectSlug: "edsuite-crm",
+    nextProjectSlug: "exam-portal",
     context: {
       title: "The Tension & Context",
       subtitle: "The craft exists. The audience does too. The connection doesn't.",
@@ -291,96 +374,16 @@ export const projectsData: Project[] = [
     }
   },
   {
-    id: "project-edsuite-crm",
-    slug: "edsuite-crm",
-    number: "02",
-    title: "CRM",
-    shortDescription: "A B2B SaaS CRM and management product focused on managing inquiries, follow-ups, and operational workflows.",
-    fullDescription: "edsuit CRM is a B2B SaaS CRM and management product focused on managing inquiries, follow-ups and related workflows. My main involvement centered on UI/UX design, detailed screen design in Figma, working through iterations and redesigns, deployment, testing, and fixing/reworking issues after testing.",
-    category: "Product & UI / Screen Design × B2B SaaS",
-    year: "2026",
-    tags: ["UI / Screen Design in Figma", "B2B SaaS CRM", "Iterations & Redesign", "Testing & Deployment"],
-    thumbnail: "/edsuite/CRM dash 1.png",
-    hoverVideo: "/edsuite/CRM.mp4",
-    heroImage: "/edsuite/CRM dash 1.png",
-    role: "UI & Screen Designer",
-    duration: "Student Project (2026)",
-    team: "Student Initiative",
-    tools: ["Figma", "Design System", "Testing & QA", "Deployment Handoff"],
-    prevProjectSlug: "karagir",
-    nextProjectSlug: "exam-portal",
-    context: {
-      title: "Context & Operational Scope",
-      subtitle: "High-volume inquiry triage, scheduled follow-ups, and pipeline visibility",
-      content: "B2B teams face high daily incoming volume across diverse channels. Without a structured workflow, inquiries slip through cracks, callback reminders are missed, and pipeline velocity drops.",
-      keyPoints: [
-        "Inquiry Ingestion: Centralizing incoming leads from forms, phone, and outreach campaigns.",
-        "Follow-up Discipline: Providing teams with priority queues and instant callback logging.",
-        "Operational Transparency: Clear pipeline stages to track deal movement and team productivity."
-      ]
-    },
-    research: {
-      title: "Design System Foundations",
-      subtitle: "Reusable component tokens and data-dense patterns in Figma",
-      content: "Created a comprehensive Figma design system tailored for operational clarity, consistent status pill taxonomy, responsive data tables, and modal triggers.",
-      keyPoints: [
-        "Consistent color tokens and typographic hierarchy for rapid row scanning",
-        "Modular table row layouts supporting inline status updates and quick actions",
-        "Form input states, validation badges, and high-contrast alert indicators"
-      ]
-    },
-    exploration: {
-      title: "UI Design & Screen Explorations",
-      subtitle: "Balancing high information density with interface clarity",
-      content: "Designed the complete dashboard, all-leads directory, and visual pipeline kanban in Figma to support power users throughout their full workday.",
-      keyPoints: [
-        "Dashboard overview with daily dispatch counters and activity charts",
-        "Filterable lead tables with instant search and batch actions",
-        "Multi-stage opportunity pipeline with drag-and-drop workflow"
-      ]
-    },
-    process: {
-      title: "Testing & User Feedback",
-      subtitle: "Validating workflows under live team conditions",
-      content: "Conducted usability testing with active users to identify bottlenecks in call logging, lead updates, and navigation during active phone calls.",
-      keyPoints: [
-        "Noticed context switching friction when navigating away from the active list",
-        "Identified the need for immediate one-tap disposition logs after calls",
-        "Refined status tags to prevent ambiguous lead states"
-      ]
-    },
-    solution: {
-      title: "Iterations, Redesign & Deployment",
-      subtitle: "Reworking problem areas and shipping production fixes",
-      content: "Reworked the lead inspection flow into a streamlined sliding panel, simplified follow-up creation, and collaborated closely with engineering through deployment and bug fixes.",
-      keyPoints: [
-        "Sliding inspection panel that preserves table scroll and active filter state",
-        "Quick-entry follow-up drawer reducing callback scheduling time",
-        "Post-deployment testing and design QA to fix edge-case UI regressions"
-      ]
-    },
-    outcome: {
-      title: "Production Workspace Delivery",
-      subtitle: "A cohesive, dependable B2B operational tool",
-      content: "Delivered a refined, complete CRM experience that keeps inquiries organized, clarifies daily follow-up responsibilities, and provides team leads with transparent activity metrics."
-    },
-    reflection: {
-      title: "Product Walkthrough & Reflection",
-      subtitle: "Designing for operational efficiency",
-      content: "Working on edsuit CRM underscored that great B2B UI is measured by how seamlessly it supports repetitive daily work. Eliminating small frictions adds up to massive gains in team focus and reliability.",
-      quote: "B2B software succeeds when it respects the user's focus and makes complex tasks feel second nature."
-    }
-  },
-  {
     id: "project-exam-portal",
     slug: "exam-portal",
     number: "03",
     title: "Exam Portal",
+    readTime: "5 min read",
     shortDescription: "A multi-tier assessment platform serving Institute Admin (web + mobile), Professors (mobile), and Students (mobile).",
     fullDescription: "The Exam Portal is an assessment platform designed for educational institutions, serving Institute Admin (web + mobile console), Professors (mobile authoring & grading), and Students (mobile exam room). My involvement encompassed rapid exploratory prototyping in Google Stitch, detailed UI design in Figma, design approvals, developer handoff, deployment, usability testing with real users, and redesigning points of friction.",
     category: "Product & UI Design × Assessment Platform",
     year: "2026",
-    tags: ["UI / Screen Design in Figma", "Google Stitch", "Developer Handoff", "Testing & Deployment"],
+    tags: ["UI / Screen Design in Figma", "Ed Tech", "Developer Handoff", "Testing & Deployment"],
     thumbnail: "/edsuite/exam-thumbnail.png?v=last-second",
     hoverVideo: "/edsuite/EXAMS.mp4",
     heroImage: "/edsuite/Admin.png",
@@ -388,8 +391,8 @@ export const projectsData: Project[] = [
     duration: "Product Cycle",
     team: "Cross-functional Team",
     tools: ["Google Stitch", "Figma", "Developer Handoff", "Testing & QA"],
-    prevProjectSlug: "edsuite-crm",
-    nextProjectSlug: "karagir",
+    prevProjectSlug: "karagir",
+    nextProjectSlug: "sustainability-ux",
     context: {
       title: "Context & Role Governance",
       subtitle: "High-stakes assessments across three dedicated institutional roles",
@@ -450,6 +453,195 @@ export const projectsData: Project[] = [
       subtitle: "High-stakes design demands clarity and resilience",
       content: "Designing for examination environments taught me that high-stress interfaces require extreme clarity. When students and evaluators feel supported by predictable, transparent UI, they can focus entirely on knowledge and fair assessment.",
       quote: "In high-stakes interfaces, simplicity is not just an aesthetic choice—it is a functional necessity."
+    }
+  },
+  {
+    id: "project-sustainability-ux",
+    slug: "sustainability-ux",
+    number: "04",
+    title: "Sustainability UX",
+    readTime: "8 min presentation",
+    shortDescription: "Designing digital behavioral nudges and circular economy loops that inspire mindful consumer habits.",
+    fullDescription: "Exploration into how digital product design, cognitive framing, and behavioral nudges can motivate sustainable consumer practices and circular product lifecycle loops.",
+    category: "Sustainable UX × Behavioral Design",
+    year: "2025",
+    tags: ["Circular Economy", "Behavioral Nudges", "Impact Metrics", "Sustainable Systems"],
+    thumbnail: "/thumbnails/nature.jpg",
+    heroImage: "/thumbnails/nature.jpg",
+    pdfUrl: "/pdfs/sustainable-ux.pdf",
+    accentColor: "#D3FA53",
+    role: "Product & Behavioral Designer",
+    duration: "Research & Prototyping",
+    team: "UX & Sustainability Research",
+    tools: ["Behavioral Nudges", "Lifecycle Analysis", "Figma", "System Dynamics"],
+    prevProjectSlug: "exam-portal",
+    nextProjectSlug: "service-design",
+    context: {
+      title: "Context & Ecological Imperative",
+      subtitle: "Bridging the attitude-behavior gap in sustainability",
+      content: "While many users express a strong desire to live sustainably, cognitive biases, convenience defaults, and opaque supply chains prevent consistent eco-conscious choices.",
+      keyPoints: [
+        "The Intention-Action Gap: Overcoming friction between environmental values and daily convenience.",
+        "Invisible Impact: Making the hidden environmental cost of decisions tangible and understandable.",
+        "Positive Reinforcement: Rewarding small regenerative choices without guilt or cognitive exhaustion."
+      ]
+    },
+    research: {
+      title: "Behavioral Economics & User Habits",
+      subtitle: "Understanding consumer decision triggers",
+      content: "Analyzed behavioral levers, default biases, and social proof mechanics to determine how micro-interactions can steer sustainable outcomes."
+    },
+    exploration: {
+      title: "Designing Mindful Defaults",
+      subtitle: "Prototyping circular loops and transparent impact feedback",
+      content: "Designed interfaces that frame sustainable alternatives as the effortless, rewarding choice while providing instant visual impact feedback."
+    },
+    process: {
+      title: "Testing Nudge Architectures",
+      subtitle: "Validating user engagement and clarity",
+      content: "Tested diverse framing mechanisms (carbon savings, longevity comparisons, social benchmarks) to discover the most empowering and non-preachy UX tone."
+    },
+    solution: {
+      title: "The Sustainable Product Strategy",
+      subtitle: "Actionable frameworks for regenerative design",
+      content: "Synthesized the insights into a complete presentation deck featuring behavioral models, UI patterns, and circular product strategies."
+    },
+    outcome: {
+      title: "Presentation & Strategic Framework",
+      subtitle: "Complete sustainability UX deck",
+      content: "Explore the complete multi-slide deck below outlining the research, behavioral models, circular loops, and UI experiments."
+    },
+    reflection: {
+      title: "Reflection",
+      subtitle: "Design as a regenerative tool",
+      content: "Sustainability in design is not about restriction; it is about designing interactions that make care, stewardship, and circularity feel intuitive and delightful.",
+      quote: "When sustainable actions become the most delightful choice, planetary care turns into everyday habit."
+    }
+  },
+  {
+    id: "project-service-design",
+    slug: "service-design",
+    number: "05",
+    title: "Service Design",
+    readTime: "7 min presentation",
+    shortDescription: "End-to-end service blueprinting and multi-stakeholder ecosystem mapping for holistic user journeys.",
+    fullDescription: "A comprehensive service design project examining service ecosystems, touchpoints, backstage operations, and stakeholder workflows to deliver cohesive, seamless service experiences.",
+    category: "Service Design × Systems UX",
+    year: "2025",
+    tags: ["Service Blueprint", "Systems Thinking", "User Journeys", "Stakeholder Mapping"],
+    thumbnail: "/thumbnails/making.jpg",
+    heroImage: "/thumbnails/making.jpg",
+    pdfUrl: "/pdfs/service-design.pdf",
+    accentColor: "#C8B6FF",
+    role: "Lead Service & UX Designer",
+    duration: "Academic Project",
+    team: "Design Research & Systems",
+    tools: ["Service Blueprinting", "Figma", "User Journey Mapping", "Stakeholder Analysis"],
+    prevProjectSlug: "sustainability-ux",
+    nextProjectSlug: "special-needs",
+    context: {
+      title: "Context & Systemic Challenge",
+      subtitle: "Unifying fragmented touchpoints and backstage operations",
+      content: "Complex services fail not because individual touchpoints are broken, but because the transitions between frontstage user actions and backstage operations are misaligned.",
+      keyPoints: [
+        "Fragmented Touchpoints: Users encountering disjointed experiences across digital and physical transitions.",
+        "Operational Silos: Backstage departments operating without visibility into end-to-end customer sentiment.",
+        "Systemic Opportunities: Identifying high-leverage intervention points to elevate service reliability."
+      ]
+    },
+    research: {
+      title: "Stakeholder Ecosystem Mapping",
+      subtitle: "Tracing user expectations and organizational constraints",
+      content: "Conducted contextual interviews, shadowing sessions, and workflow mapping to chart the full service ecosystem from both customer and staff perspectives."
+    },
+    exploration: {
+      title: "Service Blueprint Architecture",
+      subtitle: "Bridging frontstage interactions with backstage support processes",
+      content: "Developed detailed service blueprints detailing evidence lines, customer actions, frontstage interactions, backstage actions, and supporting infrastructure."
+    },
+    process: {
+      title: "Touchpoint Prototyping",
+      subtitle: "Testing moments of truth with users",
+      content: "Prototyped key transitional moments and handoffs to evaluate cognitive load, clarity of next steps, and customer peace of mind."
+    },
+    solution: {
+      title: "Holistic Service Delivery",
+      subtitle: "A synchronized, transparent service experience",
+      content: "Presented the complete service design deck detailing the blueprint, customer journey timelines, service principles, and implementation roadmap."
+    },
+    outcome: {
+      title: "Presentation & Deliverables",
+      subtitle: "Comprehensive service design deck",
+      content: "The complete case study presentation deck is accessible below, documenting the full research, blueprints, ecosystem maps, and strategic interventions."
+    },
+    reflection: {
+      title: "Reflection",
+      subtitle: "Designing the invisible fabric of services",
+      content: "Service design reminds us that interface screens are only the tip of the iceberg; the real magic happens when backstage processes work in harmonious sync with human needs.",
+      quote: "Great services feel effortlessly simple because immense care was put into the backstage harmony."
+    }
+  },
+  {
+    id: "project-special-needs",
+    slug: "special-needs",
+    number: "06",
+    title: "Special Needs",
+    readTime: "6 min presentation",
+    shortDescription: "Sensory-conscious interfaces and assistive interaction paradigms designed for neurodiverse individuals.",
+    fullDescription: "A human-centered design initiative focusing on accessibility, reduced cognitive load, sensory balance, and adaptive interaction paradigms for children and individuals with special needs.",
+    category: "Assistive Tech × Inclusive Design",
+    year: "2025",
+    tags: ["Inclusive Design", "Neurodiversity UX", "Sensory Ergonomics", "Assistive Tech"],
+    thumbnail: "/thumbnails/dance.jpg",
+    heroImage: "/thumbnails/dance.jpg",
+    pdfUrl: "/pdfs/special-needs.pdf",
+    accentColor: "#3DBCF9",
+    role: "Lead Inclusive Product Designer",
+    duration: "Field Immersion & Prototyping",
+    team: "Accessibility & Inclusive UX",
+    tools: ["WCAG Standards", "Sensory Ergonomics", "Figma", "Adaptive Interfaces"],
+    prevProjectSlug: "service-design",
+    nextProjectSlug: "edsuite-crm",
+    context: {
+      title: "Context & Accessibility Focus",
+      subtitle: "Digital spaces that welcome neurodiverse learners",
+      content: "Traditional digital platforms overload neurodiverse individuals with loud sensory triggers, ambiguous visual hierarchies, and rigid interaction modalities.",
+      keyPoints: [
+        "Sensory Sensitivity: High visual clutter and abrupt sounds trigger cognitive overload.",
+        "Motor & Cognitive Diversity: Interfaces requiring complex micro-gestures create unnecessary barriers.",
+        "Adaptive Agency: Giving users and caretakers flexible control over sensory pacing and feedback."
+      ]
+    },
+    research: {
+      title: "Sensory Ergonomics & Field Immersion",
+      subtitle: "Observing real interaction friction points",
+      content: "Engaged with educators, occupational therapists, and neurodiverse children to identify sensory comfort zones and high-anxiety interface triggers."
+    },
+    exploration: {
+      title: "Calm UI & Multi-Sensory Modalities",
+      subtitle: "Prototyping gentle, predictable interactions",
+      content: "Designed calm, high-contrast, distraction-free visual layouts with customizable sensory profiles, clear reassurance cues, and tangible feedback."
+    },
+    process: {
+      title: "Co-Design & Usability Iteration",
+      subtitle: "Refining with educators and students",
+      content: "Conducted collaborative sessions to validate touch target scales, palette calming effects, and icon comprehension."
+    },
+    solution: {
+      title: "Inclusive Interaction Design",
+      subtitle: "Empowering every learner with dignity",
+      content: "Created a comprehensive presentation deck capturing the inclusive design methodology, sensory audit, screen designs, and assistive interaction guidelines."
+    },
+    outcome: {
+      title: "Complete Presentation Deck",
+      subtitle: "Full design documentation and research",
+      content: "Browse the full presentation deck below detailing the inclusive research, sensory testing, design tokens, and final assistive interfaces."
+    },
+    reflection: {
+      title: "Reflection",
+      subtitle: "Designing for edge cases elevates everyone",
+      content: "When we design for the extremes of human ability and sensory perception, the resulting solutions are not only accessible—they are universally clearer, calmer, and more humane for all people.",
+      quote: "Designing for inclusion doesn’t limit creativity; it reveals the deepest essence of empathy in product design."
     }
   }
 ];

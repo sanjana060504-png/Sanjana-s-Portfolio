@@ -131,9 +131,6 @@ export const AboutSection: React.FC = () => {
 
               {/* Card Label & Photo Caption */}
               <div className="absolute bottom-3.5 sm:bottom-4 left-3.5 sm:left-4 right-3.5 sm:right-4 text-white pointer-events-none z-20">
-                <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#F4D000] block mb-0.5">
-                  UX & Product Designer · Student at MIT Institute of Design
-                </span>
                 <p className="text-xs sm:text-sm font-semibold text-white/95 leading-snug drop-shadow-md">
                   Sanjana Deshmukh · Pune, India
                 </p>
@@ -185,7 +182,7 @@ export const AboutSection: React.FC = () => {
               })}
             </div>
 
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#FFFFFF] dark:bg-[#181818] border border-[#E5E2D6] dark:border-[#2C2C2C] min-h-[120px] flex items-start shadow-xs">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#FFFFFF] dark:bg-[#181818] border border-[#E5E2D6] dark:border-[#2C2C2C] h-[230px] sm:h-[180px] md:h-[160px] lg:h-[155px] flex items-start shadow-xs overflow-hidden">
               <p className="text-sm sm:text-base text-[#605E59] dark:text-[#B0AEA8] leading-relaxed font-normal">
                 {personalProfile.bioSections[activeBioTab]?.text ?? personalProfile.bioSections[0]?.text}
               </p>

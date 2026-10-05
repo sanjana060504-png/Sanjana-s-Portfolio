@@ -43,20 +43,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   <meta charset="utf-8">
   <title>Sanjana Deshmukh - Resume</title>
   <style>
-    @page { margin: 12mm 15mm; size: A4 portrait; }
+    @page { margin: 10mm 14mm; size: A4 portrait; }
     * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color: #111111;
       background: #FFFFFF;
       margin: 0;
-      padding: 24px;
+      padding: 16px 20px;
       font-size: 11px;
-      line-height: 1.5;
+      line-height: 1.45;
+    }
+    .header-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+    }
+    .header-table td {
+      vertical-align: top;
+      padding: 0;
     }
     h1 {
       margin: 0 0 2px 0;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       letter-spacing: -0.5px;
       text-transform: uppercase;
@@ -67,95 +76,115 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       font-weight: 700;
       color: #4A4843;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 6px;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
     }
     .contact-row {
-      font-size: 11px;
-      color: #605E59;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 2.5px solid #F4D000;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10.5px;
+      color: #555555;
     }
-    .contact-row span { margin-right: 8px; }
+    .contact-row span { margin-right: 6px; }
+    .header-links {
+      text-align: right;
+      font-size: 10.5px;
+      line-height: 1.6;
+    }
+    .header-links a {
+      color: #111111;
+      text-decoration: underline;
+      display: block;
+    }
+    .yellow-bar {
+      height: 3.5px;
+      background-color: #F4D000;
+      margin: 8px 0 14px 0;
+      width: 100%;
+    }
     h2 {
       font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: #111111;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
-      padding-bottom: 3px;
-      margin: 14px 0 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      padding-bottom: 2px;
+      margin: 12px 0 6px 0;
     }
     p { margin: 0 0 4px 0; color: #333333; font-size: 11px; }
     .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
     .bold { font-weight: 700; color: #111111; font-size: 11.5px; }
-    .role-sub { font-weight: 600; color: #444444; }
+    .role-sub { font-weight: 500; color: #444444; }
     .project-sub { font-weight: 400; color: #555555; }
-    .subtext { color: #666666; font-size: 10.5px; }
-    .date { color: #777777; font-size: 10.5px; font-weight: 500; }
-    ul { margin: 2px 0 6px 18px; padding: 0; }
-    li { margin-bottom: 2px; color: #333333; font-size: 11px; }
-    .project-item { margin-bottom: 8px; }
-    .footer-note { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 9.5px; color: #888888; }
+    .subtext { color: #555555; font-size: 10.5px; }
+    .date { color: #666666; font-size: 10.5px; font-weight: 500; white-space: nowrap; }
+    ul { margin: 2px 0 6px 16px; padding: 0; }
+    li { margin-bottom: 2px; color: #333333; font-size: 10.5px; line-height: 1.4; }
+    .project-item { margin-bottom: 7px; }
+    .skills-row { display: flex; margin-bottom: 3px; font-size: 10.5px; }
+    .skills-label { width: 70px; font-weight: 700; color: #111111; shrink: 0; }
+    .skills-content { flex: 1; color: #333333; line-height: 1.4; }
   </style>
 </head>
 <body>
-  <h1>Sanjana Deshmukh</h1>
-  <div class="subtitle">UX / Product Designer</div>
-  <div class="contact-row">
-    <span>sanjana060504@gmail.com</span>
-    <span>·</span>
-    <span>+91 9518720730</span>
-    <span>·</span>
-    <span>Pune, India</span>
-  </div>
+  <table class="header-table">
+    <tr>
+      <td>
+        <h1>SANJANA DESHMUKH</h1>
+        <div class="subtitle">UX / PRODUCT DESIGNER</div>
+        <div class="contact-row">
+          <span>sanjana060504@gmail.com</span>
+          <span>·</span>
+          <span>+91 9518720730</span>
+          <span>·</span>
+          <span>Pune, India</span>
+        </div>
+      </td>
+      <td style="width: 140px;">
+        <div class="header-links">
+          <a href="#">MyPortfolio</a>
+          <a href="https://linkedin.com">linkedin.com</a>
+          <a href="https://behance.net">behance.net</a>
+        </div>
+      </td>
+    </tr>
+  </table>
 
-  <h2>Profile</h2>
-  <p>UX / Product Design student focused on turning research and complex workflows into clear, usable digital products. Works across research, information architecture, interaction design, prototyping, and high-fidelity UI.</p>
+  <div class="yellow-bar"></div>
 
-  <h2>Education</h2>
+  <h2>PROFILE</h2>
+  <p>UX / Product Designer and final-year student focused on turning research and complex workflows into clear, usable digital products. Works across research, information architecture, interaction design, prototyping, and high-fidelity UI.</p>
+
+  <h2>EXPERIENCE</h2>
   <div class="row">
-    <div>
-      <span class="bold">Bachelor of Design · UX Design</span>
-      <div class="subtext">Institute of Design, MIT ADT University, Pune</div>
-    </div>
-    <span class="date">2023–present</span>
-  </div>
-
-  <h2>Experience</h2>
-  <div class="row">
-    <span class="bold">Hooterbux Ventures Pvt. Ltd. · <span class="role-sub">Product Strategy Intern</span></span>
-    <span class="date">May–July 2026</span>
+    <span class="bold">Hooterbux Venture Pvt Ltd · <span class="role-sub">Product Strategy Intern</span></span>
+    <span class="date">May-July 2026</span>
   </div>
   <ul>
     <li>Contributed to the strategy and interface design of a B2B SaaS CRM, translating business requirements into structured user flows, dashboards, and product screens.</li>
     <li>Worked on an EdTech platform, shaping the product experience and interface for a client-facing digital solution.</li>
     <li>Worked on concepts for professional networking and conference experiences, exploring how people could connect, discover relevant professionals, and engage before and during events.</li>
   </ul>
-  <div class="row" style="margin-top: 6px;">
+  <div class="row" style="margin-top: 4px;">
     <span class="bold">Crystallite AAC Block Pvt. Ltd. · <span class="role-sub">Freelance / Website Project</span></span>
-    <span class="date">Aug–Sept 2026</span>
+    <span class="date">Aug-Sept 2026</span>
   </div>
   <ul>
     <li>Designed and developed the website end-to-end, creating a clear digital brand presence and structured product showcase. Built responsive layouts with clear content hierarchy and product-focused navigation.</li>
   </ul>
 
-  <h2>Selected Work</h2>
+  <h2>SELECTED WORK</h2>
   <div class="project-item">
-    <div class="bold">Karagir · <span class="project-sub">Cultural Studies × UX / Product Design × Agentic AI</span></div>
-    <ul>
-      <li>Mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs, and cultural organisations.</li>
-      <li>Worked across research, cultural context, information architecture, product flows, and agentic AI.</li>
-    </ul>
-  </div>
-  <div class="project-item">
-    <div class="bold">EdSuite CRM · <span class="project-sub">B2B × SaaS × Product UI × Screen Design</span></div>
+    <div class="bold">CRM platform · <span class="project-sub">B2B × SaaS × Product UI × ScreenDesign</span></div>
     <ul>
       <li>Redesigned a B2B CRM focused on admissions, enquiries, follow-ups, team activity, and operational workflows.</li>
       <li>Created high-fidelity screens and a product-demo narrative.</li>
+    </ul>
+  </div>
+  <div class="project-item">
+    <div class="bold">Karagir · <span class="project-sub">CulturalStudies × UX / ProductDesign × AgenticAI</span></div>
+    <ul>
+      <li>Mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs, and cultural organisations.</li>
+      <li>Worked across research, cultural context, information architecture, product flows, and agentic AI.</li>
     </ul>
   </div>
   <div class="project-item">
@@ -172,33 +201,56 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     </ul>
   </div>
 
-  <h2>College Experience</h2>
+  <h2>EDUCATION</h2>
   <div class="row">
-    <span class="bold">Treasurer — NatakBitak</span>
+    <div>
+      <span class="bold">Bachelor of Design · UX Design</span>
+      <div class="subtext">Institute of Design, MIT ADT University, Pune</div>
+    </div>
+    <span class="date">2023–present</span>
+  </div>
+
+  <h2>SKILLS</h2>
+  <div class="skills-row">
+    <div class="skills-label">Design</div>
+    <div class="skills-content">Product Design · Interaction Design · User-Centered Design · Information Architecture · User Flows · Wireframing · Prototyping · High-Fidelity UI · Design Systems</div>
+  </div>
+  <div class="skills-row">
+    <div class="skills-label">Research</div>
+    <div class="skills-content">User Research · User Interviews · Usability Testing · Journey Mapping · Personas · Heuristic Evaluation · Competitor Analysis</div>
+  </div>
+  <div class="skills-row">
+    <div class="skills-label">AI</div>
+    <div class="skills-content">Agentic AI Experiences · Human-AI Interaction · Conversational UI</div>
+  </div>
+  <div class="skills-row">
+    <div class="skills-label">Web</div>
+    <div class="skills-content">Visual Design · Responsive Design · Web Design</div>
+  </div>
+
+  <h2>COLLEGE INVOLVEMENT</h2>
+  <div class="row">
+    <span class="bold">Treasurer — Natak Bitak <span style="font-weight: 600; color: #444444;">· Drama Club · MIT ID</span></span>
     <span class="date">2025–2026</span>
   </div>
   <p class="subtext">Managed club finances, fundraising, volunteers, and event coordination.</p>
-  <div class="row">
-    <span class="bold">Club Member — NatakBitak</span>
+  <div class="row" style="margin-top: 3px;">
+    <span class="bold">ClubMember — Natak Bitak <span style="font-weight: 600; color: #444444;">· Drama Club · MIT ID</span></span>
     <span class="date">2024–2025</span>
   </div>
   <p class="subtext">Supported event planning, logistics, promotion, and student-team coordination.</p>
 
-  <h2>Skills</h2>
-  <p>UX Research · User Interviews · Journey Mapping · Personas · Information Architecture · Interaction Design · Wireframing · Prototyping · Usability Testing · Design Thinking · Storytelling · AI Integration</p>
-
-  <h2>Tools</h2>
-  <p>Figma · FigJam · Miro · Adobe XD · Canva · Photoshop · Google AI Studio · Claude · Stitch</p>
-
-  <h2>Languages</h2>
-  <p>English · Marathi · Hindi</p>
-
-  <div class="footer-note">Sanjana Deshmukh • Resume (2026)</div>
+  <h2>TOOLS</h2>
+  <p style="font-size: 10.5px; line-height: 1.4;">Figma · FigJam · Framer · Miro · Sketch · Procreate · Google AI Studio · Claude · Stitch · GitHub · Vercel · WordPress</p>
 </body>
 </html>`;
   };
 
   const handlePrint = () => {
+    // Restore body overflow for print capture
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'visible';
+
     try {
       const existingFrame = document.getElementById('resume-print-frame');
       if (existingFrame && document.body.contains(existingFrame)) {
@@ -206,13 +258,14 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       }
 
       const printFrame = document.createElement('iframe');
-      printFrame.style.position = 'fixed';
-      printFrame.style.right = '0';
-      printFrame.style.bottom = '0';
-      printFrame.style.width = '0';
-      printFrame.style.height = '0';
-      printFrame.style.border = '0';
       printFrame.id = 'resume-print-frame';
+      // Set visible dimensions off-screen so Chrome/WebKit renders it cleanly
+      printFrame.style.position = 'fixed';
+      printFrame.style.left = '-9999px';
+      printFrame.style.top = '0';
+      printFrame.style.width = '850px';
+      printFrame.style.height = '1200px';
+      printFrame.style.border = '0';
       document.body.appendChild(printFrame);
 
       const doc = printFrame.contentWindow?.document;
@@ -232,14 +285,25 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             if (document.body.contains(printFrame)) {
               document.body.removeChild(printFrame);
             }
-          }, 2000);
-        }, 250);
+            if (isOpen) {
+              document.body.style.overflow = 'hidden';
+            } else {
+              document.body.style.overflow = prevOverflow;
+            }
+          }, 1500);
+        }, 300);
         return;
       }
-    } catch (err) {
-      console.error('Print iframe error:', err);
+    } catch {
+      window.print();
+      setTimeout(() => {
+        if (isOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = prevOverflow;
+        }
+      }, 500);
     }
-    window.print();
   };
 
   const handleDownload = async () => {
@@ -274,7 +338,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       console.error('PDF export error, falling back to direct HTML download:', err);
     }
 
-    // Reliable Fallback: Standalone styled HTML document download
+    // Fallback: Standalone styled HTML document download
     try {
       const blob = new Blob([getResumeHtmlForPrint()], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
@@ -299,7 +363,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       aria-modal="true"
       aria-labelledby="resume-title"
     >
-      {/* Outer wrapper: items-start prevents flex-center cutoff bug */}
+      {/* Outer wrapper */}
       <div className="min-h-full flex flex-col items-center justify-start py-4 sm:py-8">
         {/* Top Control Bar above the document */}
         <div
@@ -365,7 +429,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           }}
         >
           {/* RESUME HEADER */}
-          <div className="border-b-2 border-[#F4D000] pb-4 mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
             <div>
               <h1 id="resume-title" className="text-2xl sm:text-3xl font-black tracking-tight text-[#111111] uppercase font-sans">
                 SANJANA DESHMUKH
@@ -373,57 +437,58 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               <p className="text-xs sm:text-sm font-bold tracking-widest text-[#4A4843] uppercase mt-0.5">
                 UX / PRODUCT DESIGNER
               </p>
+              <div className="text-xs text-[#555555] mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-sans">
+                <span>sanjana060504@gmail.com</span>
+                <span>·</span>
+                <span>+91 9518720730</span>
+                <span>·</span>
+                <span>Pune, India</span>
+              </div>
             </div>
 
-            <div className="text-xs text-[#605E59] mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1">
-              <span className="font-mono">sanjana060504@gmail.com</span>
-              <span>·</span>
-              <span>+91 9518720730</span>
-              <span>·</span>
-              <span>Pune, India</span>
+            {/* Top-Right Portfolio Links */}
+            <div className="text-xs text-[#111111] sm:text-right space-y-0.5 shrink-0 font-sans">
+              <a href="#" onClick={(e) => { e.preventDefault(); onClose(); }} className="block underline hover:text-[#0284C7] transition-colors">
+                MyPortfolio
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block underline hover:text-[#0284C7] transition-colors">
+                linkedin.com
+              </a>
+              <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="block underline hover:text-[#0284C7] transition-colors">
+                behance.net
+              </a>
             </div>
           </div>
 
+          {/* Yellow Accent Bar */}
+          <div className="w-full h-1 bg-[#F4D000] mt-3.5 mb-5" />
+
           {/* RESUME BODY */}
-          <div className="space-y-6 text-[#1A1A1A] text-xs leading-relaxed font-sans">
+          <div className="space-y-5 text-[#1A1A1A] text-xs leading-relaxed font-sans">
             {/* PROFILE */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
                 PROFILE
               </h2>
               <p className="text-[#333333] text-[11.5px] leading-normal">
-                UX / Product Design student focused on turning research and complex workflows into clear, usable digital products. Works across research, information architecture, interaction design, prototyping, and high-fidelity UI.
+                UX / Product Designer and final-year student focused on turning research and complex workflows into clear, usable digital products. Works across research, information architecture, interaction design, prototyping, and high-fidelity UI.
               </p>
-            </section>
-
-            {/* EDUCATION */}
-            <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
-                EDUCATION
-              </h2>
-              <div className="flex justify-between items-baseline">
-                <div>
-                  <span className="font-bold text-[12px] text-[#111111]">Bachelor of Design · UX Design</span>
-                  <p className="text-[#555555] text-[11px]">Institute of Design, MIT ADT University, Pune</p>
-                </div>
-                <span className="text-[11px] text-[#777777] font-medium shrink-0">2023–present</span>
-              </div>
             </section>
 
             {/* EXPERIENCE */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
                 EXPERIENCE
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 <div>
                   <div className="flex justify-between items-baseline mb-1">
                     <span className="font-bold text-[12px] text-[#111111]">
-                      Hooterbux Ventures Pvt. Ltd. · <span className="font-semibold text-[#444444]">Product Strategy Intern</span>
+                      Hooterbux Venture Pvt Ltd · <span className="font-medium text-[#444444]">Product Strategy Intern</span>
                     </span>
-                    <span className="text-[11px] text-[#777777] font-medium shrink-0">May–July 2026</span>
+                    <span className="text-[11px] text-[#666666] font-medium shrink-0 ml-2">May-July 2026</span>
                   </div>
-                  <ul className="list-disc list-outside pl-4 space-y-1 text-[#333333] text-[11px]">
+                  <ul className="list-disc ml-4 space-y-1 text-[#333333] text-[11px] leading-relaxed">
                     <li>Contributed to the strategy and interface design of a B2B SaaS CRM, translating business requirements into structured user flows, dashboards, and product screens.</li>
                     <li>Worked on an EdTech platform, shaping the product experience and interface for a client-facing digital solution.</li>
                     <li>Worked on concepts for professional networking and conference experiences, exploring how people could connect, discover relevant professionals, and engage before and during events.</li>
@@ -433,57 +498,57 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <div>
                   <div className="flex justify-between items-baseline mb-1">
                     <span className="font-bold text-[12px] text-[#111111]">
-                      Crystallite AAC Block Pvt. Ltd. · <span className="font-semibold text-[#444444]">Freelance / Website Project</span>
+                      Crystallite AAC Block Pvt. Ltd. · <span className="font-medium text-[#444444]">Freelance / Website Project</span>
                     </span>
-                    <span className="text-[11px] text-[#777777] font-medium shrink-0">Aug–Sept 2026</span>
+                    <span className="text-[11px] text-[#666666] font-medium shrink-0 ml-2">Aug-Sept 2026</span>
                   </div>
-                  <ul className="list-disc list-outside pl-4 space-y-1 text-[#333333] text-[11px]">
+                  <ul className="list-disc ml-4 space-y-1 text-[#333333] text-[11px] leading-relaxed">
                     <li>Designed and developed the website end-to-end, creating a clear digital brand presence and structured product showcase. Built responsive layouts with clear content hierarchy and product-focused navigation.</li>
                   </ul>
                 </div>
               </div>
             </section>
 
-            {/* SELECTED WORK (Placed right after EXPERIENCE per request) */}
+            {/* SELECTED WORK */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
                 SELECTED WORK
               </h2>
-              <div className="space-y-2.5">
+              <div className="space-y-3">
                 <div>
-                  <span className="font-bold text-[11.5px] text-[#111111]">
-                    Karagir · <span className="font-normal text-[#555555]">Cultural Studies × UX / Product Design × Agentic AI</span>
-                  </span>
-                  <ul className="list-disc list-outside pl-4 space-y-0.5 text-[#333333] text-[11px]">
-                    <li>Mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs, and cultural organisations.</li>
-                    <li>Worked across research, cultural context, information architecture, product flows, and agentic AI.</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <span className="font-bold text-[11.5px] text-[#111111]">
-                    EdSuite CRM · <span className="font-normal text-[#555555]">B2B × SaaS × Product UI × Screen Design</span>
-                  </span>
-                  <ul className="list-disc list-outside pl-4 space-y-0.5 text-[#333333] text-[11px]">
+                  <div className="font-bold text-[11.5px] text-[#111111]">
+                    CRM platform · <span className="font-normal text-[#555555]">B2B × SaaS × Product UI × ScreenDesign</span>
+                  </div>
+                  <ul className="list-disc ml-4 space-y-0.5 text-[#333333] text-[11px] leading-relaxed mt-0.5">
                     <li>Redesigned a B2B CRM focused on admissions, enquiries, follow-ups, team activity, and operational workflows.</li>
                     <li>Created high-fidelity screens and a product-demo narrative.</li>
                   </ul>
                 </div>
 
                 <div>
-                  <span className="font-bold text-[11.5px] text-[#111111]">
+                  <div className="font-bold text-[11.5px] text-[#111111]">
+                    Karagir · <span className="font-normal text-[#555555]">CulturalStudies × UX / ProductDesign × AgenticAI</span>
+                  </div>
+                  <ul className="list-disc ml-4 space-y-0.5 text-[#333333] text-[11px] leading-relaxed mt-0.5">
+                    <li>Mobile-first cultural ecosystem connecting Maharashtra's tribal artisans, customers, NGOs, and cultural organisations.</li>
+                    <li>Worked across research, cultural context, information architecture, product flows, and agentic AI.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <div className="font-bold text-[11.5px] text-[#111111]">
                     Exam Portal · <span className="font-normal text-[#555555]">Product & UI Design × Assessment Platform × Ed Tech</span>
-                  </span>
-                  <ul className="list-disc list-outside pl-4 space-y-0.5 text-[#333333] text-[11px]">
+                  </div>
+                  <ul className="list-disc ml-4 space-y-0.5 text-[#333333] text-[11px] leading-relaxed mt-0.5">
                     <li>Designed institute-admin web workflows and mobile experiences for different user roles, covering information architecture, interaction flows, interface design, and prototype-ready screens.</li>
                   </ul>
                 </div>
 
                 <div>
-                  <span className="font-bold text-[11.5px] text-[#111111]">
+                  <div className="font-bold text-[11.5px] text-[#111111]">
                     Interactive Tangible Learning Board · <span className="font-normal text-[#555555]">Physical Product × UX × Interactive Learning</span>
-                  </span>
-                  <ul className="list-disc list-outside pl-4 space-y-0.5 text-[#333333] text-[11px]">
+                  </div>
+                  <ul className="list-disc ml-4 space-y-0.5 text-[#333333] text-[11px] leading-relaxed mt-0.5">
                     <li>Developed a physical-digital learning product that combines RFID-based interaction, embedded electronics, and a companion mobile experience for children.</li>
                     <li>Took the concept from interaction design to a refined, functional, and manufacturable prototype.</li>
                   </ul>
@@ -491,100 +556,90 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </div>
             </section>
 
-            {/* COLLEGE EXPERIENCE */}
+            {/* EDUCATION */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
-                COLLEGE EXPERIENCE
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+                EDUCATION
               </h2>
-              <div className="space-y-2">
-                <div>
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-bold text-[11.5px] text-[#111111]">Treasurer — NatakBitak</span>
-                    <span className="text-[11px] text-[#777777]">2025–2026</span>
-                  </div>
-                  <p className="text-[#444444] text-[11px]">Managed club finances, fundraising, volunteers, and event coordination.</p>
+              <div>
+                <div className="flex justify-between items-baseline">
+                  <span className="font-bold text-[11.5px] text-[#111111]">Bachelor of Design · UX Design</span>
+                  <span className="text-[11px] text-[#666666] font-medium shrink-0 ml-2">2023–present</span>
                 </div>
-                <div>
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-bold text-[11.5px] text-[#111111]">Club Member — NatakBitak</span>
-                    <span className="text-[11px] text-[#777777]">2024–2025</span>
-                  </div>
-                  <p className="text-[#444444] text-[11px]">Supported event planning, logistics, promotion, and student-team coordination.</p>
-                </div>
+                <p className="text-[#555555] text-[11px]">Institute of Design, MIT ADT University, Pune</p>
               </div>
             </section>
 
             {/* SKILLS */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
                 SKILLS
               </h2>
-              <p className="text-[#333333] text-[11px] leading-relaxed">
-                UX Research · User Interviews · Journey Mapping · Personas · Information Architecture · Interaction Design · Wireframing · Prototyping · Usability Testing · Design Thinking · Storytelling · AI Integration
-              </p>
+              <div className="space-y-1.5 text-[11px]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                  <span className="font-bold text-[#111111] w-20 shrink-0">Design</span>
+                  <span className="text-[#333333] leading-relaxed">
+                    Product Design · Interaction Design · User-Centered Design · Information Architecture · User Flows · Wireframing · Prototyping · High-Fidelity UI · Design Systems
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                  <span className="font-bold text-[#111111] w-20 shrink-0">Research</span>
+                  <span className="text-[#333333] leading-relaxed">
+                    User Research · User Interviews · Usability Testing · Journey Mapping · Personas · Heuristic Evaluation · Competitor Analysis
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                  <span className="font-bold text-[#111111] w-20 shrink-0">AI</span>
+                  <span className="text-[#333333] leading-relaxed">
+                    Agentic AI Experiences · Human-AI Interaction · Conversational UI
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                  <span className="font-bold text-[#111111] w-20 shrink-0">Web</span>
+                  <span className="text-[#333333] leading-relaxed">
+                    Visual Design · Responsive Design · Web Design
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            {/* COLLEGE INVOLVEMENT */}
+            <section>
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+                COLLEGE INVOLVEMENT
+              </h2>
+              <div className="space-y-2.5">
+                <div>
+                  <div className="flex justify-between items-baseline">
+                    <span className="font-bold text-[11.5px] text-[#111111]">
+                      Treasurer — Natak Bitak <span className="font-semibold text-[#444444]">· Drama Club · MIT ID</span>
+                    </span>
+                    <span className="text-[11px] text-[#666666] font-medium shrink-0 ml-2">2025–2026</span>
+                  </div>
+                  <p className="text-[#555555] text-[11px]">Managed club finances, fundraising, volunteers, and event coordination.</p>
+                </div>
+                <div>
+                  <div className="flex justify-between items-baseline">
+                    <span className="font-bold text-[11.5px] text-[#111111]">
+                      ClubMember — Natak Bitak <span className="font-semibold text-[#444444]">· Drama Club · MIT ID</span>
+                    </span>
+                    <span className="text-[11px] text-[#666666] font-medium shrink-0 ml-2">2024–2025</span>
+                  </div>
+                  <p className="text-[#555555] text-[11px]">Supported event planning, logistics, promotion, and student-team coordination.</p>
+                </div>
+              </div>
             </section>
 
             {/* TOOLS */}
             <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
+              <h2 className="text-[11px] font-extrabold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
                 TOOLS
               </h2>
-              <p className="text-[#333333] text-[11px]">
-                Figma · FigJam · Miro · Adobe XD · Canva · Photoshop · Google AI Studio · Claude · Stitch
-              </p>
-            </section>
-
-            {/* LANGUAGES */}
-            <section>
-              <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#111111] border-b border-black/15 pb-1 mb-2">
-                LANGUAGES
-              </h2>
-              <p className="text-[#333333] text-[11px]">
-                English · Marathi · Hindi
+              <p className="text-[#333333] text-[11px] leading-relaxed">
+                Figma · FigJam · Framer · Miro · Sketch · Procreate · Google AI Studio · Claude · Stitch · GitHub · Vercel · WordPress
               </p>
             </section>
           </div>
-
-          {/* Footer Note */}
-          <div className="mt-8 pt-4 border-t border-black/10 flex items-center justify-between text-[10px] text-[#888888] print:hidden">
-            <span>Sanjana Deshmukh • Resume (2026)</span>
-          </div>
-        </div>
-
-        {/* Action buttons under resume for easy direct access */}
-        <div
-          className="w-full max-w-3xl flex flex-wrap items-center justify-center gap-3 mt-6 pb-4 print:hidden z-10"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            onClick={handleDownload}
-            disabled={isDownloading}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F4D000] text-black hover:bg-white transition-all text-xs font-bold shadow-lg border border-black/10 cursor-pointer active:scale-95 disabled:opacity-70 disabled:cursor-wait"
-            title="Download Resume as PDF"
-            id="resume-bottom-download-btn"
-          >
-            {isDownloading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Preparing PDF...</span>
-              </>
-            ) : (
-              <>
-                <Download className="w-4 h-4" />
-                <span>Download PDF</span>
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-black transition-all text-xs font-bold shadow-lg border border-white/20 cursor-pointer active:scale-95"
-            title="Print Resume"
-            id="resume-bottom-print-btn"
-          >
-            <Printer className="w-4 h-4" />
-            <span>Print Resume</span>
-          </button>
         </div>
       </div>
     </div>

@@ -73,22 +73,11 @@ export const ToolIcon: React.FC<{ name: string; className?: string }> = ({ name,
       );
     case 'Stitch':
       return (
-        <svg viewBox="0 0 24 24" className={className} fill="none">
-          <rect width="24" height="24" rx="6" fill="#2563EB"/>
-          <path
-            d="M7 8a4 4 0 0 1 7.2-2.4L18 9m-1 7a4 4 0 0 1-7.2 2.4L6 15"
-            stroke="white"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M10 10l4 4"
-            stroke="white"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-          />
-        </svg>
+        <img
+          src="/stitch-logo.png"
+          alt="Stitch"
+          className={`${className} object-contain rounded-md`}
+        />
       );
     case 'Notion':
       return (

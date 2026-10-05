@@ -282,8 +282,8 @@ export const KaragirCaseStudy: React.FC<KaragirCaseStudyProps> = ({
   }, [isFullscreenPrototype, onBack]);
 
   // Project navigation for bottom footer
-  const prevProject = projectsData.find((p) => p.slug === 'roots') || projectsData[1];
-  const nextProject = projectsData.find((p) => p.slug === 'beyond-the-brief') || projectsData[2];
+  const prevProject = projectsData.find((p) => p.slug === 'edsuite-crm') || projectsData[0];
+  const nextProject = projectsData.find((p) => p.slug === 'exam-portal') || projectsData[2];
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] selection:bg-[#F4D000] selection:text-black relative">

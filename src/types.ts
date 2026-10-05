@@ -17,6 +17,7 @@ export interface Project {
   slug: string;
   number: string;
   title: string;
+  readTime?: string;
   shortDescription: string;
   fullDescription: string;
   category: string;
@@ -31,6 +32,8 @@ export interface Project {
   tools: string[];
   liveLink?: string;
   prototypeUrl?: string;
+  pdfUrl?: string;
+  accentColor?: string;
   context: ProjectCaseStudySection;
   research: ProjectCaseStudySection;
   exploration: ProjectCaseStudySection;

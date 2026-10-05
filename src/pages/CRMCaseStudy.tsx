@@ -14,6 +14,7 @@ import {
   ChevronDown,
   X,
   FileText,
+  Eye,
   Clock,
   Filter,
   Kanban,
@@ -145,8 +146,8 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
     scrollToSection('final-output');
   };
 
-  const prevProject = projectsData.find((p) => p.slug === 'karagir') || projectsData[0];
-  const nextProject = projectsData.find((p) => p.slug === 'exam-portal') || projectsData[2];
+  const prevProject = projectsData.find((p) => p.slug === 'exam-portal') || projectsData[2];
+  const nextProject = projectsData.find((p) => p.slug === 'karagir') || projectsData[1];
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] selection:bg-[#0284C7] selection:text-white transition-colors duration-200 relative">
@@ -156,19 +157,28 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
           Clean cover video showcase + concise metadata card
           ============================================================ */}
       <section className="w-full pt-4 pb-8 px-4 sm:px-6 max-w-6xl mx-auto border-b border-black/[0.08] dark:border-white/[0.08]">
-        {/* Cover Video Frame — Clean looping preview without controls */}
+        {/* Cover Video Frame — CRM Intro Video looping preview */}
         <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-black/10 dark:border-white/10 bg-[#0B1420] aspect-video flex items-center justify-center relative">
           <video
             ref={coverVideoRef}
-            src="/edsuite/CRM.mp4"
+            src="/edsuite/EdSuit_CRM_logo_intro_202607131741.mp4"
             poster="/edsuite/CRM dash 1.png"
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (!target.src.includes('EdSuit_CRM_logo_intro')) {
+                target.src = '/edsuite/EdSuit_CRM_logo_intro_202607131741.mp4';
+                target.play().catch(() => {});
+              }
+            }}
             className="w-full h-full object-contain block select-none"
           >
+            <source src="/edsuite/EdSuit_CRM_logo_intro_202607131741.mp4" type="video/mp4" />
+            <source src="/EdSuit_CRM_logo_intro_202607131741.mp4" type="video/mp4" />
             <source src="/edsuite/CRM.mp4" type="video/mp4" />
             Your browser does not support HTML5 video playback.
           </video>
@@ -178,10 +188,10 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
         <div className="mt-8 bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-black/[0.08] dark:border-white/[0.12] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <span className="text-xs font-sans font-bold tracking-widest text-[#0284C7] dark:text-[#38BDF8] uppercase block mb-1">
-              Student Project · B2B SaaS
+              PRODUCT & UI DESIGN · B2B SAAS
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#111111] dark:text-[#F5F4EF]">
-              CRM
+              edsuit CRM
             </h1>
             <p className="text-sm font-sans text-[#605E59] dark:text-[#8E8D88] mt-1 max-w-xl">
               An operational workspace designed for rapid lead triage, scheduled callback tracking, and clear pipeline progression.
@@ -192,7 +202,7 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
             <div>
               <span className="text-[#8E8D88] uppercase block mb-1 font-medium">My Role</span>
               <span className="font-bold text-[#111111] dark:text-[#F5F4EF] block">
-                UX & UI Design
+                UX & UI Designer
               </span>
             </div>
             <div>
@@ -210,7 +220,7 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
             <div>
               <span className="text-[#8E8D88] uppercase block mb-1 font-medium">Timeline</span>
               <span className="font-bold text-[#111111] dark:text-[#F5F4EF] block">
-                Student Project (2026)
+                Summer Internship · 2026
               </span>
             </div>
           </div>
@@ -294,134 +304,169 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Visual Story Sequence: Situation → Need → Observation → Friction → Opportunity */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
-              {/* Step 1: Real-World Situation */}
-              <div className="p-4 rounded-2xl bg-[#F7F6F0] dark:bg-[#202020] border border-black/[0.06] dark:border-white/[0.08] space-y-2 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-sans font-bold text-[#8E8D88] uppercase tracking-wider">
+          {/* 5 Journey Stages: Situation · Need · Observation · Friction · Opportunity */}
+          <div className="space-y-6 sm:space-y-8">
+            {/* 5 Compact Stage Cards with Hand-drawn Doodle Connector Line */}
+            <div className="relative">
+              {/* Sequential Subtle Doodle Connector Arrows (Desktop SVG) */}
+              <svg
+                className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible"
+                viewBox="0 0 1000 60"
+                preserveAspectRatio="none"
+                fill="none"
+                aria-hidden="true"
+              >
+                {/* 1 -> 2: Situation to Need (Delicate micro-curve) */}
+                <g className="opacity-60 hover:opacity-100 transition-opacity">
+                  <path
+                    d="M 191 30 C 194 27, 198 28, 201 30"
+                    stroke="#0284C7"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeDasharray="2 1.5"
+                    className="dark:stroke-[#38BDF8]"
+                  />
+                  <path
+                    d="M 197.5 28 L 201 30 L 197.5 32"
+                    stroke="#0284C7"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="dark:stroke-[#38BDF8]"
+                  />
+                </g>
+
+                {/* 2 -> 3: Need to Observation (Delicate micro-dip) */}
+                <g className="opacity-60 hover:opacity-100 transition-opacity">
+                  <path
+                    d="M 394 30 C 397 32.5, 401 32, 404 30"
+                    stroke="#D97706"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeDasharray="2 1.5"
+                    className="dark:stroke-[#F59E0B]"
+                  />
+                  <path
+                    d="M 400.5 28 L 404 30 L 400.5 32"
+                    stroke="#D97706"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="dark:stroke-[#F59E0B]"
+                  />
+                </g>
+
+                {/* 3 -> 4: Observation to Friction (Delicate micro-curve) */}
+                <g className="opacity-60 hover:opacity-100 transition-opacity">
+                  <path
+                    d="M 597 30 C 600 27.5, 604 28, 607 30"
+                    stroke="#E04F4F"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeDasharray="2 1.5"
+                    className="dark:stroke-[#F87171]"
+                  />
+                  <path
+                    d="M 603.5 28 L 607 30 L 603.5 32"
+                    stroke="#E04F4F"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="dark:stroke-[#F87171]"
+                  />
+                </g>
+
+                {/* 4 -> 5: Friction to Opportunity (Delicate micro-dip) */}
+                <g className="opacity-60 hover:opacity-100 transition-opacity">
+                  <path
+                    d="M 800 30 C 803 32.5, 807 32, 810 30"
+                    stroke="#0284C7"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeDasharray="2 1.5"
+                    className="dark:stroke-[#38BDF8]"
+                  />
+                  <path
+                    d="M 806.5 28 L 810 30 L 806.5 32"
+                    stroke="#0284C7"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="dark:stroke-[#38BDF8]"
+                  />
+                </g>
+              </svg>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 relative z-10">
+                {/* Situation */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/85 dark:bg-[#161616]/85 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] shadow-xs flex items-center justify-between gap-2 hover:bg-white/95 dark:hover:bg-[#1b1b1b]/95 transition-all group">
+                  <div className="flex items-center gap-2.5">
+                    <Filter className="w-4 h-4 text-[#0284C7] dark:text-[#38BDF8] shrink-0" />
+                    <h4 className="text-sm sm:text-base font-bold text-[#0284C7] dark:text-[#38BDF8] leading-snug">
                       Situation
-                    </span>
-                    <Filter className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#38BDF8]" />
+                    </h4>
                   </div>
-                  <h4 className="text-xs font-bold text-[#111111] dark:text-[#F5F4EF]">
-                    Inbound Inquiries
-                  </h4>
-                  <p className="text-[11px] text-[#605E59] dark:text-[#A09E97] leading-relaxed">
-                    Leads stream in continuously across forms, inbound calls, and ad campaigns.
-                  </p>
+                  <span className="text-[11px] font-mono text-[#0284C7]/60 dark:text-[#38BDF8]/60 lg:hidden">→</span>
                 </div>
-                <div className="pt-2 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center gap-1.5 text-[10px] text-[#0284C7] dark:text-[#38BDF8] font-bold">
-                  <span>Multiple channels</span>
-                  <ChevronRight className="w-3 h-3 ml-auto opacity-60" />
-                </div>
-              </div>
 
-              {/* Step 2: Need */}
-              <div className="p-4 rounded-2xl bg-[#F7F6F0] dark:bg-[#202020] border border-black/[0.06] dark:border-white/[0.08] space-y-2 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-sans font-bold text-[#8E8D88] uppercase tracking-wider">
+                {/* Need */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/85 dark:bg-[#161616]/85 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] shadow-xs flex items-center justify-between gap-2 hover:bg-white/95 dark:hover:bg-[#1b1b1b]/95 transition-all group">
+                  <div className="flex items-center gap-2.5">
+                    <PhoneCall className="w-4 h-4 text-[#0284C7] dark:text-[#38BDF8] shrink-0" />
+                    <h4 className="text-sm sm:text-base font-bold text-[#0284C7] dark:text-[#38BDF8] leading-snug">
                       Need
-                    </span>
-                    <PhoneCall className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#38BDF8]" />
+                    </h4>
                   </div>
-                  <h4 className="text-xs font-bold text-[#111111] dark:text-[#F5F4EF]">
-                    Track & Follow Up
-                  </h4>
-                  <p className="text-[11px] text-[#605E59] dark:text-[#A09E97] leading-relaxed">
-                    Counselors must assign reps, dial prospects, and progress stages to enroll.
-                  </p>
+                  <span className="text-[11px] font-mono text-[#0284C7]/60 dark:text-[#38BDF8]/60 lg:hidden">→</span>
                 </div>
-                <div className="pt-2 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center gap-1.5 text-[10px] text-[#0284C7] dark:text-[#38BDF8] font-bold">
-                  <span>Timely outreach</span>
-                  <ChevronRight className="w-3 h-3 ml-auto opacity-60" />
-                </div>
-              </div>
 
-              {/* Step 3: Observation */}
-              <div className="p-4 rounded-2xl bg-[#F7F6F0] dark:bg-[#202020] border border-black/[0.06] dark:border-white/[0.08] space-y-2 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-sans font-bold text-[#8E8D88] uppercase tracking-wider">
+                {/* Observation */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/85 dark:bg-[#161616]/85 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] shadow-xs flex items-center justify-between gap-2 hover:bg-white/95 dark:hover:bg-[#1b1b1b]/95 transition-all group">
+                  <div className="flex items-center gap-2.5">
+                    <Eye className="w-4 h-4 text-[#D97706] dark:text-[#F59E0B] shrink-0" />
+                    <h4 className="text-sm sm:text-base font-bold text-[#D97706] dark:text-[#F59E0B] leading-snug">
                       Observation
-                    </span>
-                    <FileText className="w-3.5 h-3.5 text-amber-500" />
+                    </h4>
                   </div>
-                  <h4 className="text-xs font-bold text-[#111111] dark:text-[#F5F4EF]">
-                    Work Scatters
-                  </h4>
-                  <p className="text-[11px] text-[#605E59] dark:text-[#A09E97] leading-relaxed">
-                    As volume expands, notes, spreadsheets, and callbacks fragment across desks.
-                  </p>
+                  <span className="text-[11px] font-mono text-[#D97706]/60 dark:text-[#F59E0B]/60 lg:hidden">→</span>
                 </div>
-                <div className="pt-2 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center gap-1.5 text-[10px] text-amber-600 dark:text-amber-400 font-bold">
-                  <span>Isolated tools</span>
-                  <ChevronRight className="w-3 h-3 ml-auto opacity-60" />
-                </div>
-              </div>
 
-              {/* Step 4: Friction */}
-              <div className="p-4 rounded-2xl bg-[#F7F6F0] dark:bg-[#202020] border border-black/[0.06] dark:border-white/[0.08] space-y-2 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-sans font-bold text-[#E04F4F] uppercase tracking-wider">
+                {/* Friction */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/85 dark:bg-[#161616]/85 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] shadow-xs flex items-center justify-between gap-2 hover:bg-white/95 dark:hover:bg-[#1b1b1b]/95 transition-all group">
+                  <div className="flex items-center gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-[#E04F4F] shrink-0" />
+                    <h4 className="text-sm sm:text-base font-bold text-[#E04F4F] leading-snug">
                       Friction
-                    </span>
-                    <AlertCircle className="w-3.5 h-3.5 text-[#E04F4F]" />
+                    </h4>
                   </div>
-                  <h4 className="text-xs font-bold text-[#111111] dark:text-[#F5F4EF]">
-                    Context Gets Lost
-                  </h4>
-                  <p className="text-[11px] text-[#605E59] dark:text-[#A09E97] leading-relaxed">
-                    Missed callbacks, repeated manual work, and zero shared visibility into pipeline health.
-                  </p>
+                  <span className="text-[11px] font-mono text-[#E04F4F]/60 lg:hidden">→</span>
                 </div>
-                <div className="pt-2 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center gap-1.5 text-[10px] text-[#E04F4F] font-bold">
-                  <span>Dropped leads</span>
-                  <ChevronRight className="w-3 h-3 ml-auto opacity-60" />
-                </div>
-              </div>
 
-              {/* Step 5: Opportunity / Solution */}
-              <div className="p-4 rounded-2xl bg-[#E0F2FE]/70 dark:bg-[#082F49]/40 border border-[#0284C7]/30 dark:border-[#38BDF8]/30 space-y-2 flex flex-col justify-between shadow-xs">
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-sans font-bold text-[#0284C7] dark:text-[#38BDF8] uppercase tracking-wider">
-                      Opportunity
-                    </span>
-                    <Sparkles className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#38BDF8]" />
-                  </div>
-                  <h4 className="text-xs font-bold text-[#0369A1] dark:text-[#7DD3FC]">
-                    Unified Workspace
+                {/* Opportunity */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#E0F2FE]/80 dark:bg-[#082F49]/70 backdrop-blur-md border border-[#0284C7]/30 dark:border-[#38BDF8]/30 shadow-xs flex items-center gap-2.5 hover:bg-[#E0F2FE]/95 dark:hover:bg-[#082F49]/85 transition-all">
+                  <Sparkles className="w-4 h-4 text-[#0284C7] dark:text-[#38BDF8] shrink-0" />
+                  <h4 className="text-sm sm:text-base font-bold text-[#0284C7] dark:text-[#38BDF8] leading-snug">
+                    Opportunity
                   </h4>
-                  <p className="text-[11px] text-[#0369A1]/85 dark:text-[#7DD3FC]/85 leading-relaxed">
-                    A dedicated CRM bringing intake, triage, scheduled callbacks, and pipeline into one flow.
-                  </p>
-                </div>
-                <div className="pt-2 border-t border-[#0284C7]/20 flex items-center gap-1.5 text-[10px] text-[#0284C7] dark:text-[#38BDF8] font-bold">
-                  <span>Single source of truth</span>
-                  <CheckCircle2 className="w-3 h-3 ml-auto" />
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Panoramic Storyboard: Multi-Channel Inflow → Scattered Tools → Need for Unified CRM
-              Theme-aware visual: switches automatically with dark/light mode; preserved uncropped and pristine */}
-          <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-[#FAF9F5] dark:bg-[#151515] shadow-sm">
-            <img
-              src="/edsuite/crm-context-story-light.png"
-              alt="Story of how inquiries scatter across spreadsheets and notes, creating the need for a unified CRM workspace"
-              className="w-full h-auto block dark:hidden select-none"
-            />
-            <img
-              src="/edsuite/crm-context-story-dark.png"
-              alt="Story of how inquiries scatter across spreadsheets and notes, creating the need for a unified CRM workspace"
-              className="w-full h-auto hidden dark:block select-none"
-            />
+            {/* Panoramic Storyboard Graphic */}
+            <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-[#FAF9F5] dark:bg-[#151515] shadow-sm">
+              <img
+                src="/edsuite/crm-context-story-light.png"
+                alt="Story of how inquiries scatter across spreadsheets and notes, creating the need for a unified CRM workspace"
+                className="w-full h-auto block dark:hidden select-none"
+              />
+              <img
+                src="/edsuite/crm-context-story-dark.png"
+                alt="Story of how inquiries scatter across spreadsheets and notes, creating the need for a unified CRM workspace"
+                className="w-full h-auto hidden dark:block select-none"
+              />
+            </div>
           </div>
 
           {/* Visual Progression Pipeline: Fragmented Inquiries → Scattered Follow-ups → Difficult Triage → Lost Context → Unified Workspace */}
@@ -538,9 +583,31 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
                   <span className="text-xs font-sans font-bold text-[#0284C7] dark:text-[#38BDF8] uppercase tracking-wider">
                     Phase 01 · Discovery
                   </span>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08] text-[10px] font-sans font-bold text-[#605E59] dark:text-[#A09E97]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Stitch & Claude
+                  <div
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08]"
+                    title="Stitch & Claude"
+                  >
+                    <span className="sr-only">Stitch & Claude</span>
+                    {/* Stitch Logo */}
+                    <div title="Stitch" className="flex items-center justify-center">
+                      <img
+                        src="/stitch-logo.png"
+                        alt="Stitch"
+                        className="w-4 h-4 rounded-[4px] object-cover shrink-0"
+                      />
+                    </div>
+                    {/* Claude Logo */}
+                    <div title="Claude" className="flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 rounded-[4px] shrink-0" fill="none">
+                        <rect width="24" height="24" rx="4" fill="#CC785C"/>
+                        <g transform="translate(4, 4)">
+                          <path
+                            d="m3.127 10.604 3.135-1.76.053-.153-.053-.085H6.11l-.525-.032-1.791-.048-1.554-.065-1.505-.08-.38-.081L0 7.832l.036-.234.32-.214.455.04 1.009.069 1.513.105 1.097.064 1.626.17h.259l.036-.105-.089-.065-.068-.064-1.566-1.062-1.695-1.121-.887-.646-.48-.327-.243-.306-.104-.67.435-.48.585.04.15.04.593.456 1.267.981 1.654 1.218.242.202.097-.068.012-.049-.109-.181-.9-1.626-.96-1.655-.428-.686-.113-.411a2 2 0 0 1-.068-.484l.496-.674L4.446 0l.662.089.279.242.411.94.666 1.48 1.033 2.014.302.597.162.553.06.17h.105v-.097l.085-1.134.157-1.392.154-1.792.052-.504.25-.605.497-.327.387.186.319.456-.045.294-.19 1.23-.37 1.93-.243 1.29h.142l.161-.16.654-.868 1.097-1.372.484-.545.565-.601.363-.287h.686l.505.751-.226.775-.707.895-.585.759-.839 1.13-.524.904.048.072.125-.012 1.897-.403 1.024-.186 1.223-.21.553.258.06.263-.218.536-1.307.323-1.533.307-2.284.54-.028.02.032.04 1.029.098.44.024h1.077l2.005.15.525.346.315.424-.053.323-.807.411-3.631-.863-.872-.218h-.12v.073l.726.71 1.331 1.202 1.667 1.55.084.383-.214.302-.226-.032-1.464-1.101-.565-.497-1.28-1.077h-.084v.113l.295.432 1.557 2.34.08.718-.112.234-.404.141-.444-.08-.911-1.28-.94-1.44-.759-1.291-.093.053-.448 4.821-.21.246-.484.186-.403-.307-.214-.496.214-.98.258-1.28.21-1.016.19-1.263.112-.42-.008-.028-.092.012-.953 1.307-1.448 1.957-1.146 1.227-.274.109-.477-.247.045-.44.266-.39 1.586-2.018.956-1.25.617-.723-.004-.105h-.036l-4.212z"
+                            fill="white"
+                          />
+                        </g>
+                      </svg>
+                    </div>
                   </div>
                 </div>
                 <h4 className="text-base font-bold text-[#111111] dark:text-[#F5F4EF]">
@@ -562,9 +629,33 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
                   <span className="text-xs font-sans font-bold text-[#0284C7] dark:text-[#38BDF8] uppercase tracking-wider">
                     Phase 02 · Screen Design
                   </span>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08] text-[10px] font-sans font-bold text-[#605E59] dark:text-[#A09E97]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0284C7]" />
-                    Figma & ChatGPT
+                  <div
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08]"
+                    title="Figma & ChatGPT"
+                  >
+                    <span className="sr-only">Figma & ChatGPT</span>
+                    {/* Figma Logo */}
+                    <div title="Figma" className="flex items-center justify-center">
+                      <svg viewBox="0 0 38 57" className="w-2.5 h-4 shrink-0" fill="none">
+                        <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                        <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                        <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                        <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                        <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+                      </svg>
+                    </div>
+                    {/* ChatGPT Logo */}
+                    <div title="ChatGPT" className="flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 rounded-[4px] shrink-0 border border-black/10 dark:border-white/10" fill="none">
+                        <rect width="24" height="24" rx="4" fill="#FFFFFF"/>
+                        <g transform="translate(3.5, 3.5) scale(0.708)">
+                          <path
+                            d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"
+                            fill="#000000"
+                          />
+                        </g>
+                      </svg>
+                    </div>
                   </div>
                 </div>
                 <h4 className="text-base font-bold text-[#111111] dark:text-[#F5F4EF]">
@@ -586,9 +677,34 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
                   <span className="text-xs font-sans font-bold text-[#0284C7] dark:text-[#38BDF8] uppercase tracking-wider">
                     Phase 03 · Validation
                   </span>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08] text-[10px] font-sans font-bold text-[#605E59] dark:text-[#A09E97]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                    Gemini & Staging QA
+                  <div
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#F7F6F0] dark:bg-[#252525] border border-black/[0.06] dark:border-white/[0.08]"
+                    title="Gemini & Staging QA"
+                  >
+                    <span className="sr-only">Gemini & Staging QA</span>
+                    {/* Gemini Logo */}
+                    <div title="Gemini" className="flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+                        <path
+                          d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z"
+                          fill="url(#gemini-sparkle-proc-step3)"
+                        />
+                        <defs>
+                          <linearGradient id="gemini-sparkle-proc-step3" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor="#1B72E8" />
+                            <stop offset="50%" stopColor="#8E24AA" />
+                            <stop offset="100%" stopColor="#FF7769" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
+                    {/* Staging QA Badge */}
+                    <div
+                      title="Staging QA"
+                      className="px-1 py-0.5 rounded-[4px] bg-[#0284C7]/15 dark:bg-[#38BDF8]/20 text-[#0284C7] dark:text-[#38BDF8] flex items-center justify-center text-[9px] font-sans font-black tracking-tight leading-none shrink-0"
+                    >
+                      QA
+                    </div>
                   </div>
                 </div>
                 <h4 className="text-base font-bold text-[#111111] dark:text-[#F5F4EF]">
@@ -1356,12 +1472,18 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
             </p>
           </div>
 
-          {/* Hero Demo Video Container — Supports Play, Seek, Volume, and Fullscreen */}
-          <div className="rounded-2xl sm:rounded-3xl p-3 sm:p-5 bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] shadow-xl">
-            <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black border border-black/20 shadow-inner flex items-center justify-center">
+          {/* Sleek, Professional iPad Pro Mockup Frame Housing the Walkthrough Demo */}
+          <div className="relative mx-auto max-w-5xl rounded-[22px] sm:rounded-[30px] p-2 sm:p-2.5 bg-[#121215] border border-[#2c2c31] shadow-[0_24px_55px_-12px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.08)] ring-1 ring-black/40">
+            {/* Minimal Discreet Camera Dot on Top Bezel */}
+            <div className="absolute top-1 sm:top-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none z-30" aria-hidden="true">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#050507] border border-white/10 ring-1 ring-white/5" />
+            </div>
+
+            {/* Inner iPad Display Screen */}
+            <div className="relative aspect-video rounded-[16px] sm:rounded-[22px] overflow-hidden bg-black border border-white/5 shadow-inner flex items-center justify-center">
               <video
                 ref={demoVideoRef}
-                src="/edsuite/CRM%20PDVid.mp4"
+                src="/edsuite/CRM%20New%20PDV-2.mp4"
                 controls
                 playsInline
                 preload="metadata"
@@ -1371,17 +1493,17 @@ export const CRMCaseStudy: React.FC<CRMCaseStudyProps> = ({
                 onEnded={() => setIsPlayingDemo(false)}
                 onError={(e) => {
                   const target = e.currentTarget;
-                  if (!target.src.includes('CRM-PDVid')) {
-                    target.src = '/edsuite/CRM-PDVid.mp4';
+                  if (!target.src.includes('CRM.mp4')) {
+                    target.src = '/edsuite/CRM.mp4';
                   }
                 }}
               >
-                <source src="/edsuite/CRM%20PDVid.mp4" type="video/mp4" />
-                <source src="/edsuite/CRM-PDVid.mp4" type="video/mp4" />
+                <source src="/edsuite/CRM%20New%20PDV-2.mp4" type="video/mp4" />
+                <source src="/edsuite/CRM.mp4" type="video/mp4" />
                 Your browser does not support HTML5 video playback.
               </video>
 
-              {/* Product Demo Cover Overlay using the existing laptop/dashboard mockup */}
+              {/* Product Demo Cover Overlay using CRM dash 1 mockup */}
               {!isPlayingDemo && (
                 <div
                   onClick={() => {
