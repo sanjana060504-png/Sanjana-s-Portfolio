@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, Maximize2, X } from 'lucide-react';
+import { Clock, Maximize2, X } from 'lucide-react';
 import { Project } from '../types.ts';
 import { projectsData } from '../data/portfolioData.ts';
+import { CaseStudyNav, CaseStudyNavSection } from '../components/CaseStudyNav.tsx';
 import { CaseStudyPagination } from '../components/CaseStudyPagination.tsx';
 
 interface PresentationCaseStudyProps {
@@ -19,7 +20,10 @@ const getProjectSlides = (slug: string): string[] => {
     });
   }
   if (slug === 'service-design') {
-    return ['/slides/service-design/slide-001.png'];
+    return Array.from({ length: 16 }, (_, i) => {
+      const num = String(i + 1).padStart(3, '0');
+      return `/slides/service-design/slide-${num}.png`;
+    });
   }
   if (slug === 'special-needs') {
     return ['/slides/special-needs/slide-001.png'];
@@ -36,6 +40,36 @@ export const PresentationCaseStudy: React.FC<PresentationCaseStudyProps> = ({
 
   const slides = getProjectSlides(project.slug);
   const accentColor = project.accentColor || '#F4D000';
+
+  const PRESENTATION_SECTIONS: CaseStudyNavSection[] = [
+    { id: 'context', number: '01', title: 'Context' },
+    { id: 'research', number: '02', title: 'Research' },
+    { id: 'exploration', number: '03', title: 'Exploration' },
+    { id: 'process', number: '04', title: 'Process' },
+    { id: 'solution', number: '05', title: 'Solution' },
+    { id: 'outcome', number: '06', title: 'Outcome' },
+    { id: 'reflection', number: '07', title: 'Reflection' },
+  ];
+
+  const presentationContent = {
+    context: project.context,
+    research: project.research,
+    exploration: project.exploration,
+    process: project.process,
+    solution: project.solution,
+    outcome: project.outcome,
+    reflection: project.reflection,
+  };
+
+  const [activeSection, setActiveSection] = useState('context');
+
+  const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(`presentation-${id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // Navigation: Find previous and next projects
   const prevProject =
@@ -78,29 +112,6 @@ export const PresentationCaseStudy: React.FC<PresentationCaseStudyProps> = ({
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] transition-colors duration-200 relative pb-16">
-      {/* ────────────────────────────────────────────────────────
-          STICKY TOP NAVIGATION BAR
-          Preserves the existing back button exactly: "Back to Selected Work"
-          ──────────────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-40 bg-[#F7F6F0]/90 dark:bg-[#101010]/90 backdrop-blur-md border-b border-[#E5E2D6] dark:border-[#222222] py-3.5 px-5 sm:px-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <button
-            onClick={onBack}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#605E59] dark:text-[#B0AEA8] hover:text-[#111111] dark:hover:text-white transition-colors cursor-pointer group"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back to Selected Work</span>
-          </button>
-
-          <span
-            className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold"
-            style={{ backgroundColor: `${accentColor}25`, color: accentColor }}
-          >
-            Project {project.number}
-          </span>
-        </div>
-      </nav>
-
       {/* ────────────────────────────────────────────────────────
           1) INTRODUCTORY INFORMATION (AT THE TOP)
           Project Title + Reading Time + Short Project Description
@@ -191,6 +202,80 @@ export const PresentationCaseStudy: React.FC<PresentationCaseStudyProps> = ({
         </div>
       </header>
 
+      <CaseStudyNav
+        sections={PRESENTATION_SECTIONS}
+        activeSectionId={activeSection}
+        onSectionSelect={scrollToSection}
+        accent="crm"
+        onBack={onBack}
+      />
+
+      {/* ============================================================
+          CASE STUDY CONTENT SECTIONS
+          ============================================================ */}
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+        {PRESENTATION_SECTIONS.map((section) => {
+          const content = presentationContent[section.id as keyof typeof presentationContent];
+
+          if (!content) return null;
+
+          return (
+            <section
+              key={section.id}
+              id={`presentation-${section.id}`}
+              className="scroll-mt-28"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-[#161616]/70 border border-black/[0.08] dark:border-white/[0.1] backdrop-blur-md shadow-xs">
+                <div className="md:col-span-4">
+                  <span
+                    className="text-xs font-mono uppercase tracking-wider block mb-2"
+                    style={{ color: accentColor }}
+                  >
+                    {section.number}
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-black text-[#111111] dark:text-[#F5F4EF] leading-tight">
+                    {content.title}
+                  </h2>
+                  {content.subtitle && (
+                    <p className="text-xs sm:text-sm text-[#8E8D88] mt-2">
+                      {content.subtitle}
+                    </p>
+                  )}
+                </div>
+
+                <div className="md:col-span-8">
+                  <p className="text-base text-[#605E59] dark:text-[#B0AEA8] leading-relaxed">
+                    {content.content}
+                  </p>
+
+                  {content.keyPoints && content.keyPoints.length > 0 && (
+                    <div className="space-y-2 mt-5 pt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
+                      {content.keyPoints.map((point, index) => (
+                        <div key={index} className="flex items-start gap-2.5">
+                          <span
+                            className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
+                            style={{ backgroundColor: accentColor }}
+                          />
+                          <p className="text-sm text-[#605E59] dark:text-[#B0AEA8] leading-relaxed">
+                            {point}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {content.quote && (
+                    <blockquote className="mt-5 pt-5 border-t border-black/[0.06] dark:border-white/[0.08] text-sm italic text-[#605E59] dark:text-[#B0AEA8]">
+                      “{content.quote}”
+                    </blockquote>
+                  )}
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </main>
+
       {/* ────────────────────────────────────────────────────────
           2) COMPLETE PPT DECK DISPLAYED DIRECTLY ON THE PAGE
           A clean sequence of individual full-width presentation slides,
@@ -198,7 +283,7 @@ export const PresentationCaseStudy: React.FC<PresentationCaseStudyProps> = ({
           Each slide retains its original proportions and visual quality,
           with natural spacing between slides.
           ──────────────────────────────────────────────────────── */}
-      <section className="w-full py-8 sm:py-12 px-4 sm:px-6 max-w-5xl mx-auto">
+      <section id="presentation-presentation-content" className="w-full py-8 sm:py-12 px-4 sm:px-6 max-w-5xl mx-auto">
         <div className="flex flex-col gap-6 sm:gap-10">
           {slides.map((slideUrl, index) => (
             <div
@@ -257,47 +342,7 @@ export const PresentationCaseStudy: React.FC<PresentationCaseStudyProps> = ({
           3) EXISTING CLOSING SECTION WITH CONTEXT / LEARNINGS / CONTENT
           Sits directly after the complete sequence of slides
           ──────────────────────────────────────────────────────── */}
-      {project.context && (
-        <section className="px-4 sm:px-6 max-w-5xl mx-auto my-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-[#161616]/70 border border-black/[0.08] dark:border-white/[0.1] backdrop-blur-md shadow-xs">
-            <div className="md:col-span-4">
-              <span className="text-xs font-mono uppercase text-[#8E8D88] tracking-wider block mb-2">
-                01 · Systemic Scope
-              </span>
-              <h3 className="text-2xl font-black text-[#111111] dark:text-[#F5F4EF] leading-tight">
-                {project.context.title}
-              </h3>
-              {project.context.subtitle && (
-                <p className="text-xs sm:text-sm text-[#8E8D88] mt-1">
-                  {project.context.subtitle}
-                </p>
-              )}
-            </div>
 
-            <div className="md:col-span-8">
-              <p className="text-base text-[#605E59] dark:text-[#B0AEA8] leading-relaxed mb-4">
-                {project.context.content}
-              </p>
-
-              {project.context.keyPoints && project.context.keyPoints.length > 0 && (
-                <div className="space-y-2 mt-4 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
-                  {project.context.keyPoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-2.5">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
-                        style={{ backgroundColor: accentColor }}
-                      />
-                      <p className="text-sm text-[#605E59] dark:text-[#B0AEA8] leading-relaxed">
-                        {point}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ────────────────────────────────────────────────────────
           BOTTOM PREVIOUS / NEXT PROJECT PAGINATION
