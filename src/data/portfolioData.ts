@@ -459,15 +459,15 @@ export const projectsData: Project[] = [
     id: "project-sustainability-ux",
     slug: "sustainability-ux",
     number: "04",
-    title: "Sustainability UX",
-    readTime: "8 min presentation",
+    title: "Sustainable UX",
+    readTime: "8 min read",
     shortDescription: "Designing digital behavioral nudges and circular economy loops that inspire mindful consumer habits.",
     fullDescription: "Exploration into how digital product design, cognitive framing, and behavioral nudges can motivate sustainable consumer practices and circular product lifecycle loops.",
     category: "Sustainable UX × Behavioral Design",
     year: "2025",
     tags: ["Circular Economy", "Behavioral Nudges", "Impact Metrics", "Sustainable Systems"],
-    thumbnail: "/thumbnails/nature.jpg",
-    heroImage: "/thumbnails/nature.jpg",
+    thumbnail: "/slides/sustainable-ux/slide-001.png",
+    heroImage: "/slides/sustainable-ux/slide-001.png",
     pdfUrl: "/pdfs/sustainable-ux.pdf",
     accentColor: "#D3FA53",
     role: "Product & Behavioral Designer",
@@ -523,62 +523,62 @@ export const projectsData: Project[] = [
     slug: "service-design",
     number: "05",
     title: "Service Design",
-    readTime: "7 min presentation",
-    shortDescription: "End-to-end service blueprinting and multi-stakeholder ecosystem mapping for holistic user journeys.",
-    fullDescription: "A comprehensive service design project examining service ecosystems, touchpoints, backstage operations, and stakeholder workflows to deliver cohesive, seamless service experiences.",
+    readTime: "7 min read",
+    shortDescription: "Designing experiences and service blueprints for informal social gatherings — making hosting easier, smarter, and more engaging.",
+    fullDescription: "A comprehensive service design study examining informal social gatherings. By mapping user personas, applying the Parasuraman Service Gap Model, and building a full Service Blueprint, HostMate was designed to reduce host mental load, bridge coordination gaps, and integrate AI with on-ground associates.",
     category: "Service Design × Systems UX",
     year: "2025",
-    tags: ["Service Blueprint", "Systems Thinking", "User Journeys", "Stakeholder Mapping"],
-    thumbnail: "/thumbnails/making.jpg",
-    heroImage: "/thumbnails/making.jpg",
+    tags: ["Service Blueprint", "Parasuraman Gap Model", "HostMate System", "Informal Gatherings"],
+    thumbnail: "/slides/service-design/slide-001.png",
+    heroImage: "/slides/service-design/slide-001.png",
     pdfUrl: "/pdfs/service-design.pdf",
     accentColor: "#C8B6FF",
-    role: "Lead Service & UX Designer",
+    role: "Lead Service & Systems Designer",
     duration: "Academic Project",
-    team: "Design Research & Systems",
-    tools: ["Service Blueprinting", "Figma", "User Journey Mapping", "Stakeholder Analysis"],
+    team: "Service Design & Systems",
+    tools: ["Service Blueprinting", "Figma", "Parasuraman Gap Model", "User Journey Mapping"],
     prevProjectSlug: "sustainability-ux",
     nextProjectSlug: "special-needs",
     context: {
-      title: "Context & Systemic Challenge",
-      subtitle: "Unifying fragmented touchpoints and backstage operations",
-      content: "Complex services fail not because individual touchpoints are broken, but because the transitions between frontstage user actions and backstage operations are misaligned.",
+      title: "Context & Research",
+      subtitle: "Informal social gatherings: scale, friction, and unstructured support",
+      content: "Informal social gatherings (10–50 people in home or community spaces) are where people build personal connections. However, hosts manage everything alone, creating high cognitive load and coordination pressure.",
       keyPoints: [
-        "Fragmented Touchpoints: Users encountering disjointed experiences across digital and physical transitions.",
-        "Operational Silos: Backstage departments operating without visibility into end-to-end customer sentiment.",
-        "Systemic Opportunities: Identifying high-leverage intervention points to elevate service reliability."
+        "Referral Chain Problem: Word-of-mouth recommendations are unstructured with no price transparency or accountability.",
+        "Market Mapping & Service Gaps: Existing platforms serve large-scale formal events, missing the informal 10-50 person format.",
+        "Coordination Strain: Critical setup and arrival moments define gathering quality but overwhelm the host."
       ]
     },
     research: {
-      title: "Stakeholder Ecosystem Mapping",
-      subtitle: "Tracing user expectations and organizational constraints",
-      content: "Conducted contextual interviews, shadowing sessions, and workflow mapping to chart the full service ecosystem from both customer and staff perspectives."
+      title: "Service Gaps & User Persona",
+      subtitle: "Applying the Parasuraman Gap Model to host frustrations",
+      content: "Identified 4 critical service gaps (Knowledge, Standards, Delivery, Communication) and mapped host persona Aarohi to understand the emotional strain behind event coordination."
     },
     exploration: {
-      title: "Service Blueprint Architecture",
-      subtitle: "Bridging frontstage interactions with backstage support processes",
-      content: "Developed detailed service blueprints detailing evidence lines, customer actions, frontstage interactions, backstage actions, and supporting infrastructure."
+      title: "Ideation & 4 Core Opportunities",
+      subtitle: "Designing intervention points across the hosting journey",
+      content: "Framed 4 core opportunities: early vision support, single coordination layer, auto-generated brief, and a guaranteed 30-minute setup window so hosts can enjoy their own event."
     },
     process: {
-      title: "Touchpoint Prototyping",
-      subtitle: "Testing moments of truth with users",
-      content: "Prototyped key transitional moments and handoffs to evaluate cognitive load, clarity of next steps, and customer peace of mind."
+      title: "Service Blueprint & HostMate Architecture",
+      subtitle: "Translating journey maps into frontstage and backstage systems",
+      content: "Developed a full Service Blueprint mapping customer actions, frontstage triggers, backstage algorithms, and physical touchpoints across ideation, setup, event flow, and post-gathering reflection."
     },
     solution: {
-      title: "Holistic Service Delivery",
-      subtitle: "A synchronized, transparent service experience",
-      content: "Presented the complete service design deck detailing the blueprint, customer journey timelines, service principles, and implementation roadmap."
+      title: "How It Works: HostMate Solution",
+      subtitle: "AI-assisted planning and on-ground associate support",
+      content: "HostMate provides AI-generated moodboards and checklists, matches verified task associates (decor, food, photos), and deploys on-ground support so the host remains a participant."
     },
     outcome: {
-      title: "Presentation & Deliverables",
-      subtitle: "Comprehensive service design deck",
-      content: "The complete case study presentation deck is accessible below, documenting the full research, blueprints, ecosystem maps, and strategic interventions."
+      title: "Impact & Reflection",
+      subtitle: "Redistributing host responsibilities",
+      content: "The HostMate service design framework proves that by combining smart AI coordination with trained on-ground associates, informal gatherings can be effortless, joyful, and memorable."
     },
     reflection: {
       title: "Reflection",
       subtitle: "Designing the invisible fabric of services",
       content: "Service design reminds us that interface screens are only the tip of the iceberg; the real magic happens when backstage processes work in harmonious sync with human needs.",
-      quote: "Great services feel effortlessly simple because immense care was put into the backstage harmony."
+      quote: "Great services feel effortlessly simple because immense care was put into backstage harmony."
     }
   },
   {
@@ -586,7 +586,7 @@ export const projectsData: Project[] = [
     slug: "special-needs",
     number: "06",
     title: "Special Needs",
-    readTime: "6 min presentation",
+    readTime: "6 min read",
     shortDescription: "Sensory-conscious interfaces and assistive interaction paradigms designed for neurodiverse individuals.",
     fullDescription: "A human-centered design initiative focusing on accessibility, reduced cognitive load, sensory balance, and adaptive interaction paradigms for children and individuals with special needs.",
     category: "Assistive Tech × Inclusive Design",

@@ -73,6 +73,7 @@ const explorationItems: ExplorationItem[] = [
 export const CuriousByDefault: React.FC = () => {
   // Exploration Philosophy Hover State
   const [activeWord, setActiveWord] = useState<string | null>(null);
+  const [hoveredWordIndex, setHoveredWordIndex] = useState<number | null>(null);
 
   const words = [
     { word: "Every", note: "Not just safe or predictable ones." },
@@ -196,38 +197,83 @@ export const CuriousByDefault: React.FC = () => {
             <span>Exploration</span>
           </div>
 
-          {/* Main Heading with highlighter underline */}
-          <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-black tracking-tight text-[#111111] dark:text-[#F5F4EF] leading-[1.12] mb-3">
-            <div className="inline-block relative mb-1">
-              <span className="relative z-10">
-                {words.slice(0, 3).map((item, index) => (
+          {/* Main Heading with per-word expanding highlighter accents */}
+          <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-black tracking-tight text-[#111111] dark:text-[#F5F4EF] leading-[1.18] mb-3">
+            <div className="inline-block relative mb-1.5 sm:mb-2">
+              {words.slice(0, 3).map((item, index) => (
+                <span
+                  key={index}
+                  onMouseEnter={() => {
+                    setActiveWord(item.note);
+                    setHoveredWordIndex(index);
+                  }}
+                  onMouseLeave={() => {
+                    setActiveWord(null);
+                    setHoveredWordIndex(null);
+                  }}
+                  className="relative inline-block mr-2.5 sm:mr-3.5 cursor-pointer group select-none"
+                >
+                  {/* Highlight behind that expands only for this specific word */}
                   <span
-                    key={index}
-                    onMouseEnter={() => setActiveWord(item.note)}
-                    onMouseLeave={() => setActiveWord(null)}
-                    className="cursor-pointer mr-2.5 sm:mr-3 hover:text-[#F4D000] transition-colors"
+                    aria-hidden="true"
+                    className={`absolute -inset-x-1 sm:-inset-x-1.5 bottom-0.5 sm:bottom-1 rounded-sm transition-all duration-300 ease-out pointer-events-none ${
+                      hoveredWordIndex === index
+                        ? 'h-[92%] sm:h-[95%] bg-[#F4D000] dark:bg-[#F4D000] opacity-95 shadow-[0_2px_12px_rgba(244,208,0,0.35)]'
+                        : 'h-2 sm:h-2.5 bg-[#F4D000]/40 dark:bg-[#F4D000]/30 group-hover:h-[92%] sm:group-hover:h-[95%] group-hover:bg-[#F4D000] dark:group-hover:bg-[#F4D000] group-hover:opacity-95'
+                    }`}
+                  />
+                  {/* Word text */}
+                  <span
+                    className={`relative z-10 transition-colors duration-200 ${
+                      hoveredWordIndex === index
+                        ? 'text-[#111111] dark:text-[#111111]'
+                        : 'text-[#111111] dark:text-[#F5F4EF] group-hover:text-[#111111] dark:group-hover:text-[#111111]'
+                    }`}
                   >
                     {item.word}
                   </span>
-                ))}
-              </span>
-              <span className="absolute left-0 right-0 bottom-1 sm:bottom-2 h-3 sm:h-3.5 bg-[#F4D000]/40 dark:bg-[#F4D000]/30 -z-0 rounded-sm" />
+                </span>
+              ))}
             </div>
             <br />
             <div className="inline-block relative">
-              <span className="relative z-10">
-                {words.slice(3).map((item, index) => (
+              {words.slice(3).map((item, idx) => {
+                const globalIndex = idx + 3;
+                return (
                   <span
-                    key={index + 3}
-                    onMouseEnter={() => setActiveWord(item.note)}
-                    onMouseLeave={() => setActiveWord(null)}
-                    className="cursor-pointer mr-2.5 sm:mr-3 hover:text-[#F4D000] transition-colors"
+                    key={globalIndex}
+                    onMouseEnter={() => {
+                      setActiveWord(item.note);
+                      setHoveredWordIndex(globalIndex);
+                    }}
+                    onMouseLeave={() => {
+                      setActiveWord(null);
+                      setHoveredWordIndex(null);
+                    }}
+                    className="relative inline-block mr-2.5 sm:mr-3.5 cursor-pointer group select-none"
                   >
-                    {item.word}
+                    {/* Highlight behind that expands only for this specific word */}
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -inset-x-1 sm:-inset-x-1.5 bottom-0.5 sm:bottom-1 rounded-sm transition-all duration-300 ease-out pointer-events-none ${
+                        hoveredWordIndex === globalIndex
+                          ? 'h-[92%] sm:h-[95%] bg-[#F4D000] dark:bg-[#F4D000] opacity-95 shadow-[0_2px_12px_rgba(244,208,0,0.35)]'
+                          : 'h-2 sm:h-2.5 bg-[#F4D000]/40 dark:bg-[#F4D000]/30 group-hover:h-[92%] sm:group-hover:h-[95%] group-hover:bg-[#F4D000] dark:group-hover:bg-[#F4D000] group-hover:opacity-95'
+                      }`}
+                    />
+                    {/* Word text */}
+                    <span
+                      className={`relative z-10 transition-colors duration-200 ${
+                        hoveredWordIndex === globalIndex
+                          ? 'text-[#111111] dark:text-[#111111]'
+                          : 'text-[#111111] dark:text-[#F5F4EF] group-hover:text-[#111111] dark:group-hover:text-[#111111]'
+                      }`}
+                    >
+                      {item.word}
+                    </span>
                   </span>
-                ))}
-              </span>
-              <span className="absolute left-0 right-0 bottom-1 sm:bottom-2 h-3 sm:h-3.5 bg-[#F4D000]/40 dark:bg-[#F4D000]/30 -z-0 rounded-sm" />
+                );
+              })}
             </div>
           </h2>
 

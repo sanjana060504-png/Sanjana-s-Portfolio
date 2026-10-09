@@ -6,7 +6,6 @@ import {
   Layers,
   Monitor,
   Smartphone,
-  Maximize2,
   Play,
   UserCheck,
   CheckCircle2,
@@ -14,7 +13,6 @@ import {
   Wrench,
   Sparkles,
   ChevronDown,
-  X,
   GraduationCap,
   Users,
   ShieldCheck
@@ -47,7 +45,6 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
   onSelectProject,
 }) => {
   const [activeSection, setActiveSection] = useState<string>('context');
-  const [lightboxImage, setLightboxImage] = useState<{ url: string; title: string } | null>(null);
   const [activeRoleTab, setActiveRoleTab] = useState<'admin' | 'faculty' | 'student'>('admin');
 
   // Scroll spy to highlight active section in capsule navigation
@@ -95,35 +92,6 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
 
   return (
     <div className="min-h-screen bg-[#F7F6F0] dark:bg-[#101010] text-[#111111] dark:text-[#F5F4EF] selection:bg-[#01ABA7] selection:text-white transition-colors duration-200 relative">
-      {/* Lightbox Modal for Full View Screen Inspection */}
-      {lightboxImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-fadeIn"
-          onClick={() => setLightboxImage(null)}
-        >
-          <button
-            onClick={() => setLightboxImage(null)}
-            className="absolute top-6 right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
-            aria-label="Close Preview"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          <div
-            className="max-w-6xl w-full max-h-[90vh] flex flex-col items-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={lightboxImage.url}
-              alt={lightboxImage.title}
-              className="max-w-full max-h-[82vh] object-contain rounded-xl shadow-2xl border border-white/10"
-            />
-            <p className="mt-3 text-sm font-sans text-[#E0E0E0] text-center">
-              {lightboxImage.title} — Click outside to close
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* ============================================================
           1. COVER & SHORT PROJECT INTRO
           ============================================================ */}
@@ -160,10 +128,7 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
 
           {/* Right: Clean Cover Visual Card */}
           <div className="lg:col-span-5">
-            <div
-              className="relative aspect-video rounded-2xl overflow-hidden bg-white dark:bg-[#181818] border border-[#CFFAFE] dark:border-[#164E63] shadow-lg group cursor-pointer"
-              onClick={() => setLightboxImage({ url: '/edsuite/Admin.png', title: 'Exam Portal — Institute Admin Hub' })}
-            >
+            <div className="relative aspect-video rounded-2xl overflow-hidden bg-white dark:bg-[#181818] border border-[#CFFAFE] dark:border-[#164E63] shadow-lg">
               <img
                 src="/edsuite/Admin.png"
                 alt="Exam Portal Admin"
@@ -175,9 +140,6 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
                 <span className="px-2.5 py-1 rounded-full text-[10px] font-sans font-bold bg-[#111111]/80 backdrop-blur-sm flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#22D3EE] animate-pulse" />
                   Institute Admin View
-                </span>
-                <span className="flex items-center gap-1 text-[10px] font-sans font-bold text-[#22D3EE]">
-                  <Maximize2 className="w-3 h-3" /> Inspect
                 </span>
               </div>
             </div>
@@ -428,20 +390,14 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
             </div>
 
             <div className="lg:col-span-7">
-              <div
-                className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow group cursor-pointer"
-                onClick={() => setLightboxImage({ url: '/edsuite/Admin.png', title: 'Exam Portal — Institute Admin Dashboard' })}
-              >
+              <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm">
                 <img
                   src="/edsuite/Admin.png"
                   alt="Institute Admin Dashboard"
                   className="w-full h-auto object-contain block max-h-[380px]"
                 />
-                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] flex items-center justify-between text-xs font-sans text-[#8E8D88]">
+                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] text-xs font-sans text-[#8E8D88]">
                   <span>Institute Admin Interface</span>
-                  <span className="flex items-center gap-1 text-[#01ABA7] dark:text-[#22D3EE] font-bold">
-                    <Maximize2 className="w-3.5 h-3.5" /> Inspect
-                  </span>
                 </div>
               </div>
             </div>
@@ -450,20 +406,14 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
           {/* Role 2: Professor (Mobile) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 order-2 lg:order-1">
-              <div
-                className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow group cursor-pointer"
-                onClick={() => setLightboxImage({ url: '/edsuite/Faculty.png', title: 'Exam Portal — Faculty & Professor Mobile Interface' })}
-              >
+              <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm">
                 <img
                   src="/edsuite/Faculty.png"
                   alt="Faculty Mobile Interface"
                   className="w-full h-auto object-contain block max-h-[380px]"
                 />
-                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] flex items-center justify-between text-xs font-sans text-[#8E8D88]">
+                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] text-xs font-sans text-[#8E8D88]">
                   <span>Professor Mobile Evaluation</span>
-                  <span className="flex items-center gap-1 text-[#01ABA7] dark:text-[#22D3EE] font-bold">
-                    <Maximize2 className="w-3.5 h-3.5" /> Inspect
-                  </span>
                 </div>
               </div>
             </div>
@@ -502,20 +452,14 @@ export const CaseStudyView: React.FC<CaseStudyViewProps> = ({
             </div>
 
             <div className="lg:col-span-7">
-              <div
-                className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow group cursor-pointer"
-                onClick={() => setLightboxImage({ url: '/edsuite/Student.png', title: 'Exam Portal — Student Mobile Experience' })}
-              >
+              <div className="rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-[#181818]/70 backdrop-blur-xl shadow-sm">
                 <img
                   src="/edsuite/Student.png"
                   alt="Student Mobile Experience"
                   className="w-full h-auto object-contain block max-h-[380px]"
                 />
-                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] flex items-center justify-between text-xs font-sans text-[#8E8D88]">
+                <div className="p-3 bg-[#FBFBFA] dark:bg-[#151515] border-t border-[#E5E2D6] dark:border-[#252525] text-xs font-sans text-[#8E8D88]">
                   <span>Student Examination Screen</span>
-                  <span className="flex items-center gap-1 text-[#01ABA7] dark:text-[#22D3EE] font-bold">
-                    <Maximize2 className="w-3.5 h-3.5" /> Inspect
-                  </span>
                 </div>
               </div>
             </div>

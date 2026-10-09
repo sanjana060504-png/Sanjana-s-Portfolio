@@ -12,7 +12,7 @@ interface CaseStudyNavProps {
   sections: CaseStudyNavSection[];
   activeSectionId: string;
   onSectionSelect: (id: string) => void;
-  accent: 'karagir' | 'crm' | 'exam';
+  accent: 'karagir' | 'crm' | 'exam' | 'sustainability' | 'service-design' | 'special-needs';
   onJumpToOutput?: () => void;
   onBack?: () => void;
   isBottomReached?: boolean;
@@ -53,7 +53,7 @@ export const CaseStudyNav: React.FC<CaseStudyNavProps> = ({
     }
   }, [activeSectionId]);
 
-  // Project-specific accent color mappings
+  // Project-specific accent color mappings with high contrast in both light and dark modes
   const accentStyles = {
     karagir: {
       activeTab: 'bg-[#641722] text-white shadow-xs font-bold',
@@ -69,6 +69,21 @@ export const CaseStudyNav: React.FC<CaseStudyNavProps> = ({
       activeTab: 'bg-[#01ABA7] text-white shadow-xs font-bold',
       icon: 'text-[#01ABA7] dark:text-[#22D3EE]',
       hover: 'hover:text-[#01ABA7] dark:hover:text-[#22D3EE]',
+    },
+    sustainability: {
+      activeTab: 'bg-[#B7E71C] dark:bg-[#D3FA53] text-[#111111] shadow-xs font-bold',
+      icon: 'text-[#111111] dark:text-[#D3FA53]',
+      hover: 'hover:text-[#111111] dark:hover:text-[#D3FA53]',
+    },
+    'service-design': {
+      activeTab: 'bg-[#DC95FF] dark:bg-[#C8B6FF] text-[#111111] shadow-xs font-bold',
+      icon: 'text-[#111111] dark:text-[#C8B6FF]',
+      hover: 'hover:text-[#111111] dark:hover:text-[#C8B6FF]',
+    },
+    'special-needs': {
+      activeTab: 'bg-[#3DBCF9] text-[#111111] shadow-xs font-bold',
+      icon: 'text-[#111111] dark:text-[#3DBCF9]',
+      hover: 'hover:text-[#111111] dark:hover:text-[#3DBCF9]',
     },
   }[accent];
 

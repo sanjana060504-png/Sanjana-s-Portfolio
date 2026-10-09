@@ -97,6 +97,30 @@ const ProjectCardTile: React.FC<ProjectCardItemProps> = ({ project, onOpenProjec
       numberBadgeHover: 'group-hover:bg-[#01ABA7] group-hover:text-white',
       tagBorderHover: 'group-hover:border-[#01ABA7]/40',
     },
+    'sustainability-ux': {
+      cardHover: 'hover:border-[#047857]/70 dark:hover:border-[#10B981]/60 hover:shadow-[0_12px_32px_rgba(4,120,87,0.18)] hover:bg-white/95 dark:hover:bg-[#1C1C1C]/95',
+      titleHover: 'group-hover:text-[#047857] dark:group-hover:text-[#34D399]',
+      arrowHover: 'group-hover:bg-[#047857] dark:group-hover:bg-[#059669] group-hover:text-white',
+      numberHover: 'group-hover:text-[#047857] dark:group-hover:text-[#34D399]',
+      numberBadgeHover: 'group-hover:bg-[#047857] dark:group-hover:bg-[#059669] group-hover:text-white',
+      tagBorderHover: 'group-hover:border-[#047857]/40 dark:group-hover:border-[#34D399]/40',
+    },
+    'service-design': {
+      cardHover: 'hover:border-[#4338CA]/70 dark:hover:border-[#818CF8]/60 hover:shadow-[0_12px_32px_rgba(67,56,202,0.18)] hover:bg-white/95 dark:hover:bg-[#1C1C1C]/95',
+      titleHover: 'group-hover:text-[#4338CA] dark:group-hover:text-[#818CF8]',
+      arrowHover: 'group-hover:bg-[#4338CA] dark:group-hover:bg-[#4F46E5] group-hover:text-white',
+      numberHover: 'group-hover:text-[#4338CA] dark:group-hover:text-[#818CF8]',
+      numberBadgeHover: 'group-hover:bg-[#4338CA] dark:group-hover:bg-[#4F46E5] group-hover:text-white',
+      tagBorderHover: 'group-hover:border-[#4338CA]/40 dark:group-hover:border-[#818CF8]/40',
+    },
+    'special-needs': {
+      cardHover: 'hover:border-[#0284C7]/70 dark:hover:border-[#38BDF8]/60 hover:shadow-[0_12px_32px_rgba(2,132,199,0.18)] hover:bg-white/95 dark:hover:bg-[#1C1C1C]/95',
+      titleHover: 'group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]',
+      arrowHover: 'group-hover:bg-[#0284C7] group-hover:text-white',
+      numberHover: 'group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]',
+      numberBadgeHover: 'group-hover:bg-[#0284C7] group-hover:text-white',
+      tagBorderHover: 'group-hover:border-[#0284C7]/40 dark:group-hover:border-[#38BDF8]/40',
+    },
   }[project.slug] || {
     cardHover: 'hover:border-[#F4D000]/70 hover:bg-white/95 dark:hover:bg-[#1C1C1C]/95',
     titleHover: 'group-hover:text-[#F4D000]',
@@ -233,7 +257,7 @@ interface MoreProjectCardProps {
 }
 
 // Hover themes for the three More Projects:
-// Sustainable UX: #D3FA53, Service Design: #C8B6FF, Special Needs: #2D61CB
+// Sustainability UX: #B7E71C, Service Design: #DC95FF, Special Needs: #3DBCF9
 const moreProjectThemes: Record<
   string,
   {
@@ -246,19 +270,19 @@ const moreProjectThemes: Record<
 > = {
   'sustainability-ux': {
     cardHover:
-      'hover:border-[#D3FA53] hover:shadow-[0_12px_32px_rgba(211,250,83,0.22)]',
-    numberHover: 'group-hover:text-[#D3FA53]',
-    titleHover: 'group-hover:text-[#D3FA53]',
-    arrowHover: 'group-hover:bg-[#D3FA53] group-hover:text-black',
-    tagBorderHover: 'group-hover:border-[#D3FA53]/50',
+      'hover:border-[#B7E71C] hover:shadow-[0_12px_32px_rgba(183,231,28,0.22)]',
+    numberHover: 'group-hover:text-[#B7E71C]',
+    titleHover: 'group-hover:text-[#B7E71C]',
+    arrowHover: 'group-hover:bg-[#B7E71C] group-hover:text-black',
+    tagBorderHover: 'group-hover:border-[#B7E71C]/70',
   },
   'service-design': {
     cardHover:
-      'hover:border-[#C8B6FF] hover:shadow-[0_12px_32px_rgba(200,182,255,0.22)]',
-    numberHover: 'group-hover:text-[#C8B6FF]',
-    titleHover: 'group-hover:text-[#C8B6FF]',
-    arrowHover: 'group-hover:bg-[#C8B6FF] group-hover:text-black',
-    tagBorderHover: 'group-hover:border-[#C8B6FF]/50',
+      'hover:border-[#DC95FF] hover:shadow-[0_12px_32px_rgba(220,149,255,0.22)]',
+    numberHover: 'group-hover:text-[#DC95FF]',
+    titleHover: 'group-hover:text-[#DC95FF]',
+    arrowHover: 'group-hover:bg-[#DC95FF] group-hover:text-black',
+    tagBorderHover: 'group-hover:border-[#DC95FF]/70',
   },
   'special-needs': {
     cardHover:
@@ -266,7 +290,7 @@ const moreProjectThemes: Record<
     numberHover: 'group-hover:text-[#3DBCF9]',
     titleHover: 'group-hover:text-[#3DBCF9]',
     arrowHover: 'group-hover:bg-[#3DBCF9] group-hover:text-black',
-    tagBorderHover: 'group-hover:border-[#3DBCF9]/50',
+    tagBorderHover: 'group-hover:border-[#3DBCF9]/70',
   },
 };
 
@@ -315,16 +339,28 @@ const MoreProjectCard: React.FC<MoreProjectCardProps> = ({ project, onOpenProjec
         </p>
       </div>
 
-      {/* Bottom Row: Tags only (No PPT Deck label) */}
-      <div className="flex flex-wrap items-center gap-1.5 mt-4 pt-3 border-t border-black/[0.05] dark:border-white/[0.06] overflow-hidden">
-        {project.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className={`px-2 py-0.5 text-[10.5px] font-semibold rounded-full bg-[#F7F6F0]/80 dark:bg-[#222222]/80 text-[#605E59] dark:text-[#B0AEA8] border border-[#E5E2D6] dark:border-[#2C2C2C] truncate max-w-[130px] transition-colors ${theme.tagBorderHover}`}
+      {/* Bottom Row: Tags and Reading Time Badge */}
+      <div className="flex flex-wrap items-center justify-between gap-2 mt-4 pt-3 border-t border-black/[0.05] dark:border-white/[0.06]">
+        <div className="flex flex-wrap items-center gap-1.5 overflow-hidden">
+          {project.tags.slice(0, 2).map((tag) => (
+            <span
+              key={tag}
+              className={`px-2 py-0.5 text-[10.5px] font-semibold rounded-full bg-[#F7F6F0]/80 dark:bg-[#222222]/80 text-[#605E59] dark:text-[#B0AEA8] border border-[#E5E2D6] dark:border-[#2C2C2C] truncate max-w-[130px] transition-colors ${theme.tagBorderHover}`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {project.readTime && (
+          <div
+            className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10.5px] font-semibold rounded-full bg-[#FAF9F5] dark:bg-[#1C1C1C] text-[#111111] dark:text-[#F5F4EF] border border-black/[0.08] dark:border-white/[0.12] shadow-2xs transition-colors shrink-0 ${theme.tagBorderHover}`}
+            title={`Estimated reading depth: ${project.readTime}`}
           >
-            {tag}
-          </span>
-        ))}
+            <Clock className="w-2.5 h-2.5 text-[#F4D000] shrink-0" />
+            <span>{project.readTime}</span>
+          </div>
+        )}
       </div>
     </article>
   );
